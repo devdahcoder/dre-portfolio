@@ -5,6 +5,13 @@ export interface IStyle {
     style?: string | { [name: string]: any }
 }
 
+export interface IGetTime {
+    timeFormat: string;
+    timeHour: number;
+    timeMinute: string;
+    timeSecond: number;
+}
+
 export interface IWork {
     id?: number | string;
     name: string;
