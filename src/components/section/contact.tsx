@@ -1,36 +1,118 @@
-import { createSignal, createEffect, onMount, onCleanup } from "solid-js";
+import { createSignal, createEffect, onCleanup } from "solid-js";
 import ParallaxCharacter from "../parallax-character";
 import gsap from "gsap";
 
 type Props = {};
 
-const Contact = (props: Props) => {
-	
-	let sectionRef:
-		| HTMLDivElement
-		| ((el: HTMLDivElement) => void)
-		| undefined
-		| any;
+type htmlDivElementRef =
+	| HTMLDivElement
+	| ((el: HTMLDivElement) => void)
+	| undefined
+	| any;
 
-	const [contactText, setContactText] = createSignal<Array<Array<string>>>([
-		["I", "n", "t", "e", "r", "e", "s", "t", "e", "d"],
-		["i", "n"],
-		["w", "o", "r", "k", "i", "n", "g"],
-		["t", "o", "g", "e", "t", "h", "e", "r", "?"],
-		["L", "e", "t"],
-		["m", "e"],
-		["b", "u", "y"],
-		["y", "o", "u"],
-		["c", "o", "f", "f", "e", "e"],
+const Contact = (props: Props) => {
+	let sectionElementRef: htmlDivElementRef;
+
+	let openToOpportunityElementRef: htmlDivElementRef;
+
+	const interestedRefElement: htmlDivElementRef[] = [];
+
+	const coffeeRefElement: htmlDivElementRef[] = [];
+
+	const [interestedArrayText, setInterestedArrayText] = createSignal<
+		string[]
+	>([
+		"I",
+		"n",
+		"t",
+		"e",
+		"r",
+		"e",
+		"s",
+		"t",
+		"e",
+		"d",
+		"-",
+		"i",
+		"n",
+		"-",
+		"w",
+		"o",
+		"r",
+		"k",
+		"i",
+		"n",
+		"g",
+		"-",
+		"t",
+		"o",
+		"g",
+		"e",
+		"t",
+		"h",
+		"e",
+		"r",
+		"?",
 	]);
 
-	const animateSection = (target: any) => {
-		console.log("How far were here");
-		gsap.from(target, {
-			opacity: 0,
-			duration: 1,
-			ease: "power2.out",
-		});
+	const [coffeeArrayText, setCoffeeArrayText] = createSignal<string[]>([
+		"L",
+		"e",
+		"t",
+		"-",
+		"m",
+		"e",
+		"-",
+		"b",
+		"u",
+		"y",
+		"-",
+		"y",
+		"o",
+		"u",
+		"-",
+		"c",
+		"o",
+		"f",
+		"f",
+		"e",
+		"e",
+	]);
+
+	const parallaxAnimation = (
+		elementRef: htmlDivElementRef,
+		index: number,
+		delay?: number
+	) => {
+		gsap.fromTo(
+			elementRef,
+			{
+				scale: 0,
+				opacity: 0,
+				delay: 0.5,
+				yPercent: 100,
+				force3D: true,
+			},
+			{
+				duration: 0.5,
+				opacity: 1,
+				scale: 1,
+				delay: delay ? delay : 0.3 + index * 0.1,
+				yPercent: 0,
+			}
+		);
+	};
+
+	const openToOpportunityAnimation = () => {
+		gsap.fromTo(
+			openToOpportunityElementRef,
+			{ yPercent: -200, opacity: 0 },
+			{
+				yPercent: 0,
+				duration: 1,
+				opacity: 1,
+			}
+		);
 	};
 
 	createEffect(() => {
@@ -38,7 +120,13 @@ const Contact = (props: Props) => {
 			(entries) => {
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
-						animateSection(sectionRef); // Call the animation function when the section is in view
+						openToOpportunityAnimation();
+						interestedRefElement.map((ref, index) =>
+							parallaxAnimation(ref, index)
+						);
+						coffeeRefElement.map((ref, index) =>
+							parallaxAnimation(ref, index, 0.8 + index * 0.1)
+						);
 						observer.unobserve(entry.target); // Stop observing once the section is in view (if you only want it to trigger once)
 					}
 				});
@@ -46,7 +134,7 @@ const Contact = (props: Props) => {
 			{ threshold: 0.2 }
 		); // Adjust the threshold as needed for the intersection area
 
-		observer.observe(sectionRef);
+		observer.observe(sectionElementRef);
 
 		onCleanup(() => {
 			observer.disconnect(); // Clean up the observer when the component unmounts
@@ -54,9 +142,13 @@ const Contact = (props: Props) => {
 	});
 
 	return (
-		<div ref={sectionRef} id="contact-section" class="py-20 bg-[#151515]">
+		<div
+			ref={sectionElementRef}
+			id="contact-section"
+			class="py-20 bg-[#151515] overflow-hidden"
+		>
 			<div class="flex flex-col items-start justify-start gap-y-5 w-4/5 sm:my-0 sm:mx-auto px-3 transition-all duration-500 ease-in-out">
-				<div>
+				<div ref={openToOpportunityElementRef}>
 					<div class="flex flex-row items-center gap-x-3 py-1 px-5 rounded-full border bg-gradient-to-b from-slate-600 to-slate-300 bg-clip-text text-transparent">
 						<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
 
@@ -65,32 +157,20 @@ const Contact = (props: Props) => {
 				</div>
 
 				<div class="text-5xl font-bold font-cabinetgrotesk bg-gradient-to-b from-slate-600 to-slate-300 bg-clip-text text-transparent">
-					<span>Interested in working together?</span> <br />{" "}
-					<div
-						class={`flex flex-row items-center flex-wrap  gap-x-3`}
-					>
-						{/* {contactText
-							?.slice(0, 4)
-							?.map((arrayText: Array<string>, index: number) => (
-								<ParallaxCharacter
-									key={index}
-									subContainerClassName={`text-5xl`}
-									class={`!my-1 text-5xl text-white text-transparent`}
-									textArray={arrayText}
-								/>
-							))} */}
-					</div>
+					<ParallaxCharacter
+						subContainerClassName={`min-h-max flex flex-row items-center overflow-hidden flex-wrap`}
+						class={`!my-1 text-5xl bg-gradient-to-r from-gray-400 to-zinc-500 bg-clip-text text-transparent`}
+						refElementContainer={interestedRefElement}
+						textArray={interestedArrayText()}
+					/>
+
 					<div class={`flex flex-row gap-x-3`}>
-						{/* {contactText
-							?.slice(4)
-							?.map((arrayText: Array<string>, index: number) => (
-								<ParallaxCharacter
-									key={index}
-									subContainerClassName={`text-5xl`}
-									class={`!my-1 text-5xl text-white text-transparent`}
-									textArray={arrayText}
-								/>
-							))} */}
+						<ParallaxCharacter
+							subContainerClassName={`min-h-max flex flex-row items-center overflow-hidden flex-wrap`}
+							class={`!my-1 text-5xl bg-gradient-to-r from-gray-400 to-zinc-500 bg-clip-text text-transparent`}
+							refElementContainer={coffeeRefElement}
+							textArray={coffeeArrayText()}
+						/>
 					</div>
 				</div>
 

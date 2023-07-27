@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { workContent } from "../../content/work-content";
 import { IWork } from "../../interface";
 import WorkItem from "./work-item";
@@ -6,19 +5,9 @@ import WorkItem from "./work-item";
 type Props = {};
 
 const WorkList = (props: Props) => {
-	const workVariant = {
-		hidden: { opacity: 0 },
-		visible: {
-			opacity: 1,
-		},
-	};
 
 	return (
-		<motion.div
-			variants={workVariant}
-			initial="hidden"
-			whileInView="visible"
-			viewport={{ once: true }}
+		<div
 			class="flex flex-col md:items-center gap-y-36 relative"
 		>
 			{workContent.map((props: IWork, index: number) => {
@@ -27,7 +16,6 @@ const WorkList = (props: Props) => {
 				return (
 					<WorkItem
 						index={index}
-						key={index}
 						name={name}
 						detail={detail}
 						href={href}
@@ -36,7 +24,7 @@ const WorkList = (props: Props) => {
 					/>
 				);
 			})}
-		</motion.div>
+		</div>
 	);
 };
 

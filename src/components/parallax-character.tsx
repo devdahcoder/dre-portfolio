@@ -1,64 +1,44 @@
-import { motion } from "framer-motion";
+import { Component, For, JSXElement } from "solid-js";
+import { render } from "solid-js/web";
 
-type Props = {
+interface Props {
 	textArray?: string[];
 	containerClassName?: string;
 	subContainerClassName?: string;
 	class?: string;
-	delay?: number;
-	wait?: number;
 	hasPageCompletedLoading?: boolean;
-};
+	refElement?: HTMLDivElement;
+	refElementContainer: HTMLDivElement[];
+	render?: JSXElement;
+}
 
 const ParallaxCharacter = (props: Props) => {
-	const {
-		textArray,
-		class,
-		containerClassName,
-		subContainerClassName,
-		delay,
-		wait,
-		hasPageCompletedLoading,
-	} = props;
-
 	return (
 		<div
-			class={` flex flex-row items-center justify-center ${containerClassName}`}
+			class={` flex flex-row items-center justify-center ${props.containerClassName}`}
 		>
-			<span
-				class={`overflow-hidden flex flex-row items-center ${subContainerClassName}`}
+			<div
+				class={`overflow-hidden flex flex-row items-center ${props.subContainerClassName}`}
 			>
-				{textArray?.map((char: string, index: number) => {
-					const nameVariant = {
-						hidden: {
-							y: "60%",
-							opacity: 0,
-						},
-						visible: (index: number) => ({
-							y: 0,
-							opacity: 1,
-							transition: {
-								duration: 0.2,
-								delay: index * 0.03,
-								ease: "linear",
-							},
-						}),
-					};
-					return (
-						<motion.span
-							initial="hidden"
-							custom={index}
-							variants={nameVariant}
-							whileInView={"visible"}
-							viewport={{ once: true }}
-							key={index}
-							class={`${class}`}
+				<For each={props.textArray}>
+					{(text, index) => (
+						<div
+							ref={(element) =>
+								(props.refElementContainer[index()] = element!)
+							}
+							class={`h-max ${props.class}`}
 						>
-							{char}
-						</motion.span>
-					);
-				})}
-			</span>
+							{props.render ? (
+								props.render
+							) : text === " " || text === "-" || text === "" ? (
+								<span class="mx-1"></span>
+							) : (
+								text
+							)}
+						</div>
+					)}
+				</For>
+			</div>
 		</div>
 	);
 };
