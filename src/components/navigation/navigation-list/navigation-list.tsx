@@ -13,7 +13,6 @@ type Props = {
 };
 
 const NavigationList: Component<Props> = (props) => {
-
 	const linkContainers: HTMLSpanElement[][] = [];
 	const anchorBorderElements: HTMLDivElement[] = [];
 
@@ -44,10 +43,11 @@ const NavigationList: Component<Props> = (props) => {
 	const openAnchorBorder = (element: HTMLDivElement) => {
 		gsap.fromTo(
 			element,
-			{ scale: 0, duration: 0.5, width: "0px" },
 			{
-				scale: 1,
-				duration: 0.5,
+				width: "0px",
+			},
+			{
+				duration: 0.4,
 				width: "100%",
 				onComplete: () => {
 					closeAnchorBorder(element);
@@ -57,16 +57,10 @@ const NavigationList: Component<Props> = (props) => {
 	};
 
 	const closeAnchorBorder = (element: HTMLDivElement) => {
-		gsap.to(element, { scale: 0, duration: 0.7, width: "0px" });
-	};
-
-	const triggerAnchorBorderAnimation = (index: number) => {
-		openAnchorBorder(anchorBorderElements[index]);
-	};
-
-	const triggerAnchorAnimation = (index: number) => {
-		linkContainers[index].map((element: HTMLSpanElement, idx: number) => {
-			animateAnchor(element, idx);
+		gsap.to(element, {
+			duration: 0.4,
+			width: "0px",
+			ease: "bounce.out",
 		});
 	};
 
@@ -89,15 +83,23 @@ const NavigationList: Component<Props> = (props) => {
 		);
 	};
 
-	createEffect(() => {
+	const triggerAnchorBorderAnimation = (index: number) => {
+		openAnchorBorder(anchorBorderElements[index]);
+	};
 
+	const triggerAnchorAnimation = (index: number) => {
+		linkContainers[index].map((element: HTMLSpanElement, idx: number) => {
+			animateAnchor(element, idx);
+		});
+	};
+
+	createEffect(() => {
 		// Flag
 		props.isOpen;
 
 		linkContainers.map((refElement, index) =>
 			animateAnchorSection(refElement, index)
 		);
-
 	});
 
 	return (
@@ -163,7 +165,7 @@ const NavigationList: Component<Props> = (props) => {
 												(anchorBorderElements[index()] =
 													element!)
 											}
-											class="absolute left-0 bottom-0 bg-white h-[0.01rem] rounded-full"
+											class="absolute left-1/2 bottom-0 -translate-y-1/2 -translate-x-1/2 bg-white h-[0.01rem] rounded-full"
 										></div>
 									</a>
 								}
