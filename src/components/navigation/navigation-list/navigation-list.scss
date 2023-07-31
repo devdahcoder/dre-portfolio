@@ -1,0 +1,20 @@
+navigation--link {
+    position: relative;
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		border-bottom: 1px solid white;
+		transform: scale3d(0, 1, 1);
+		transition: transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+		transform-origin: center right;
+
+		&:hover {
+			transform: scale3d(1, 1, 1);
+			transform-origin: center left;
+		}
+	}
+}

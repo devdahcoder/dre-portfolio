@@ -12,7 +12,7 @@ const App: Component = () => {
 
 	return (
 		<div class="font-inter">
-			<Time />
+			{/* <Time /> */}
 			{/* <About
 				cursorType={cursorType}
 				setCursorType={setCursorType}

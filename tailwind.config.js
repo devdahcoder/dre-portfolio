@@ -9,11 +9,13 @@ module.exports = {
 		fontFamily: {
 			cabinetgrotesk: ["CabinetGrotesk", "sans-serif"],
 			inter: ["Inter", "sans-serif"],
+			staatliches: ["Staatliches", "sans-serif"],
 		},
 		extend: {
+			colors: { "primary-orange": "#F96F21" },
 			animation: {
 				"spin-slow": "spin 15s linear infinite",
-				"blinker": "blinker 600ms linear infinite",
+				blinker: "blinker 600ms linear infinite",
 				"slow-bounce": "slow-bounce 2s linear infinite",
 			},
 			keyframes: {
@@ -21,7 +23,7 @@ module.exports = {
 					"0%": { transform: "rotate(0deg)" },
 					"100%": { transform: "rotate(360deg)" },
 				},
-				"blinker": {
+				blinker: {
 					"50%": { opacity: "0.6" },
 				},
 				"slow-bounce": {

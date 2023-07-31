@@ -1,6 +1,6 @@
 import { headerNavigationLink } from "../../content/link-content";
-import HeaderNavigationList from "./navigation/header-navigation-list";
 import HeaderSocialLinkList from "./navigation/header-social-link-list";
+import HeaderNavigationList from "./navigation/navigation-list/navigation-list";
 import SectionContainer from "./section-container";
 
 type Props = {

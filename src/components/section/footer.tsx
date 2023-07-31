@@ -1,18 +1,17 @@
 import { Component } from "solid-js";
 import { footerSocialMediaLink } from "../../../content/link-content";
-import HeaderNavigationList from "../navigation/header-navigation-list";
+import NavigationList from "../navigation/navigation-list/navigation-list";
 
 type Props = {};
 
 const Footer: Component<Props> = (props: Props) => {
-	
 	const linkClassName = `text-white hover:text-blue-700 hover:underline`;
 
 	return (
 		<div class="border-t bg-[#151515] px-3">
 			<div class="flex flex-col lg:flex-row items-start sm:items-center justify-between py-5 w-4/5 sm:mx-auto sm:my-0 gap-y-5">
 				<div class="flex flex-row items-center ">
-					<HeaderNavigationList link={footerSocialMediaLink} />
+					<NavigationList link={footerSocialMediaLink} />
 				</div>
 
 				<div class="text-white">

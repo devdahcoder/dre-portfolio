@@ -79,6 +79,8 @@ const Contact = (props: Props) => {
 		"e",
 	]);
 
+	const [showCoffeeEmoji, setShowCoffeeEmoji] = createSignal<boolean>(false);
+
 	const parallaxAnimation = (
 		elementRef: htmlDivElementRef,
 		index: number,
@@ -99,6 +101,9 @@ const Contact = (props: Props) => {
 				scale: 1,
 				delay: delay ? delay : 0.3 + index * 0.1,
 				yPercent: 0,
+				onComplete: () => {
+					setShowCoffeeEmoji(true);
+				},
 			}
 		);
 	};
@@ -171,6 +176,20 @@ const Contact = (props: Props) => {
 							refElementContainer={coffeeRefElement}
 							textArray={coffeeArrayText()}
 						/>
+
+						<div class="flex flex-row items-center justify-center align-middle">
+							{showCoffeeEmoji() ? (
+								<div class="h-11">
+									<img
+										class="w-full h-full object-contain"
+										src="./image/expresso.png"
+										alt=""
+									/>
+								</div>
+							) : (
+								<></>
+							)}
+						</div>
 					</div>
 				</div>
 
