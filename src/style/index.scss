@@ -42,10 +42,13 @@
 body {
 	min-height: 100vh;
 	font-family: Inter, CabinetGrotesk, -apple-system, Satoshi,
-		BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
-		Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+		BlinkMacSystemFont, Cantarell, Helvetica Neue, sans-serif;
 	overflow-x: hidden;
 	background-color: hsl(0, 0%, 7%);
+	font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+	text-rendering: optimizeLegibility;
 
 	// .snap--section {
 	// 	height: 100vh;

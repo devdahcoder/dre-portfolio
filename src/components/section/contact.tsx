@@ -1,6 +1,7 @@
 import { createSignal, createEffect, onCleanup } from "solid-js";
 import ParallaxCharacter from "../parallax-character";
 import gsap from "gsap";
+import { elementObserver } from "../../../hook";
 
 type Props = {};
 
@@ -111,11 +112,12 @@ const Contact = (props: Props) => {
 	const openToOpportunityAnimation = () => {
 		gsap.fromTo(
 			openToOpportunityElementRef,
-			{ yPercent: -200, opacity: 0 },
+			{ yPercent: -200, opacity: 0, delay: 0.5 },
 			{
 				yPercent: 0,
-				duration: 1,
+				duration: 1.5,
 				opacity: 1,
+				ease: "back.out",
 			}
 		);
 	};
