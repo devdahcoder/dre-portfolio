@@ -11,7 +11,7 @@ type Props = {
 const ExperienceList: Component<Props> = (props: Props) => {
 
 	return (
-		<div>
+		<div class="flex flex-col items-start gap-y-8">
 			<For each={props.experienceContent}>
 				{(experienceContent, index) => (
 					<ExperienceItem
@@ -29,7 +29,7 @@ const ExperienceList: Component<Props> = (props: Props) => {
 					download={`Damilare Resume`}
 					type="pdf"
 					href="./file/dre_resume.pdf"
-					class="w-full flex flex-row items-center justify-center text-orange-600 gap-x-3 text-xl font-medium no-underline"
+					class="w-full flex flex-row items-center justify-start text-orange-600 gap-x-3 text-xl font-medium no-underline"
 				>
 					Download resume
 					<Folder class="fill-white w-5 h-5" />

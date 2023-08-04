@@ -1,5 +1,4 @@
 import { Component, JSXElement } from "solid-js";
-import { useCursor } from "../../../hook";
 
 type Props = {
 	id: string | number;
@@ -9,16 +8,12 @@ type Props = {
 	style?: {};
 	icon?: JSXElement;
 	containerClassName?: string;
-	// cursorType: string;
-	// setCursorType: WritableStream<String>;
 };
 
 const HeaderSocialLinkItem: Component<Props> = (props) => {
 	return (
 		<div class={`flex flex-row items-center ${props.containerClassName}`}>
 			<a
-				// onMouseEnter={() => props.setCursorType("hover--link")}
-				// onMouseLeave={() => props.setCursorType("")}
 				href={`${props.href}`}
 				target="_blank"
 				rel="noopener noreferrer"

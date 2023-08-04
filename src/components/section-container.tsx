@@ -1,6 +1,6 @@
 import { JSXElement } from "solid-js";
 
-type Props = {
+interface Props {
 	class?: string;
 	containerClassName?: string;
 	children?: JSXElement;
@@ -8,10 +8,9 @@ type Props = {
 };
 
 const SectionContainer = (props: Props) => {
-	const { class, containerClassName, children, id } = props;
 	return (
-		<section id={`${id}`} class={`${containerClassName}`}>
-			<div class={`w-4/5 mt-0 mx-auto ${class}`}>{children}</div>
+		<section id={`${props.id}`} class={`${props.containerClassName}`}>
+			<div class={`w-4/5 mt-0 mx-auto ${props.class}`}>{props.children}</div>
 		</section>
 	);
 };

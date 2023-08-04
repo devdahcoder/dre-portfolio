@@ -27,9 +27,10 @@ const Footer: Component<Props> = (props: Props) => {
 		gsap.fromTo(
 			subSectionElementRef,
 			{
-				yPercent: isOpen ? 200 : 0,
+				yPercent: isOpen ? 150 : 0,
 				delay: isOpen ? 0.3 : 0,
 				opacity: isOpen ? 0 : 1,
+				duration: isOpen ? 1 : 0
 			},
 			{
 				yPercent: isOpen ? 0 : 200,

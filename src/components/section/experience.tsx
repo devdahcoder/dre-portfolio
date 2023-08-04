@@ -15,7 +15,7 @@ const Experience = (props: Props) => {
 	});
 	
 	return (
-		<div class="py-16">
+		<div class="py-32">
 			<div class="flex flex-col gap-y-20 w-11/12 sm:w-4/5 sm:my-0 sm:mx-auto px-3 font-cabinetgrotesk">
 				<div
 					ref={experienceTitleRef}

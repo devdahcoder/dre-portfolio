@@ -1,0 +1,54 @@
+.contact--section {
+    display: flex;
+    flex-direction: column;
+    padding: 5rem;
+    overflow: hidden;
+    background-color: hsl(0, 0%, 8%);
+
+    .cube {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+
+  &:hover {
+  transform: rotateX(360deg) rotateY(0);
+}
+
+}
+
+.face {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-color: #ccc;
+  opacity: 0.7;
+}
+
+.front {
+  transform: translateZ(100px);
+}
+
+.back {
+  transform: translateZ(-100px) rotateY(180deg);
+}
+
+.left {
+  transform: translateX(-100px) rotateY(-90deg);
+}
+
+.right {
+  transform: translateX(100px) rotateY(90deg);
+}
+
+
+    .contact--subsection {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: start;
+        row-gap: 1.25rem;
+        // color: #0bad0b;
+    }
+}

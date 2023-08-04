@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import { Component, For, Show, createEffect } from "solid-js";
+import { Component, For, Setter, Show, createEffect } from "solid-js";
 import { NAVIGATION_TYPE } from "../../../../enum";
 import { IHeaderNavigationLink } from "../../../../interface";
 import HeaderNavigationItem from "../header-navigation-item";
@@ -7,8 +7,6 @@ import "./navigation-list.scss";
 
 type Props = {
 	link?: IHeaderNavigationLink[];
-	cursorType?: string;
-	setCursorType?: WritableStream<String>;
 	isOpen?: boolean | undefined;
 };
 
@@ -49,9 +47,6 @@ const NavigationList: Component<Props> = (props) => {
 			{
 				duration: 0.4,
 				width: "100%",
-				onComplete: () => {
-					closeAnchorBorder(element);
-				},
 			}
 		);
 	};
@@ -75,7 +70,7 @@ const NavigationList: Component<Props> = (props) => {
 				yPercent: 200,
 			},
 			{
-				duration: 0.7,
+				duration: 1,
 				opacity: 1,
 				delay: 0.1 + index * 0.2,
 				yPercent: 0,
@@ -83,8 +78,12 @@ const NavigationList: Component<Props> = (props) => {
 		);
 	};
 
-	const triggerAnchorBorderAnimation = (index: number) => {
+	const triggerOpenAnchorBorderAnimation = (index: number) => {
 		openAnchorBorder(anchorBorderElements[index]);
+	};
+
+	const triggerCloseAnchorBorderAnimation = (index: number) => {
+		closeAnchorBorder(anchorBorderElements[index]);
 	};
 
 	const triggerAnchorAnimation = (index: number) => {
@@ -120,10 +119,11 @@ const NavigationList: Component<Props> = (props) => {
 									<a
 										onMouseEnter={() => {
 											triggerAnchorAnimation(index());
-											triggerAnchorBorderAnimation(
+											triggerOpenAnchorBorderAnimation(
 												index()
 											);
 										}}
+										onMouseLeave={() => triggerCloseAnchorBorderAnimation(index())}
 										href={`https://${link.href}`}
 										target="_blank"
 										rel="noopener noreferrer"
