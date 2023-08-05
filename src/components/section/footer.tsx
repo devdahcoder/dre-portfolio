@@ -6,7 +6,6 @@ import gsap from "gsap";
 type Props = {};
 
 const Footer: Component<Props> = (props: Props) => {
-
 	const [isOpen, setIsOpen] = createSignal<boolean | undefined>(false);
 
 	let sectionElementRef:
@@ -30,7 +29,7 @@ const Footer: Component<Props> = (props: Props) => {
 				yPercent: isOpen ? 150 : 0,
 				delay: isOpen ? 0.3 : 0,
 				opacity: isOpen ? 0 : 1,
-				duration: isOpen ? 1 : 0
+				duration: isOpen ? 1 : 0,
 			},
 			{
 				yPercent: isOpen ? 0 : 200,
@@ -49,7 +48,7 @@ const Footer: Component<Props> = (props: Props) => {
 						setIsOpen(true);
 						animateSection(true);
 					} else {
-						setIsOpen(false)
+						setIsOpen(false);
 						animateSection(false);
 					}
 				});
@@ -66,10 +65,16 @@ const Footer: Component<Props> = (props: Props) => {
 
 	return (
 		<div ref={sectionElementRef} class="overflow-y-hidden">
-			<div ref={subSectionElementRef} class="border-t-[0.01rem] bg-[#151515] px-3">
+			<div
+				ref={subSectionElementRef}
+				class="border-t-[0.01rem] bg-[#151515] px-3"
+			>
 				<div class="flex flex-col lg:flex-row items-start sm:items-center justify-between py-5 w-4/5 sm:mx-auto sm:my-0 gap-y-5">
 					<div class="flex flex-row items-center ">
-						<NavigationList link={footerSocialMediaLink} isOpen={isOpen()} />
+						<NavigationList
+							link={footerSocialMediaLink}
+							isOpen={isOpen()}
+						/>
 					</div>
 
 					<div class="text-white">

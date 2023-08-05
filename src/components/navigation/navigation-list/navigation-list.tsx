@@ -11,6 +11,7 @@ type Props = {
 };
 
 const NavigationList: Component<Props> = (props) => {
+	
 	const linkContainers: HTMLSpanElement[][] = [];
 	const anchorBorderElements: HTMLDivElement[] = [];
 

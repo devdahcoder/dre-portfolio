@@ -28,6 +28,8 @@ const Contact = (props: Props) => {
 	const interestedRefs: htmlDivElementRef[] = [];
 	const coffeeRefs: htmlDivElementRef[] = [];
 
+	const [hoverContactAnchor, setHoverContactAnchor] = createSignal<boolean>(false);
+
 	const [interestedText, setInterestedText] = createSignal<string>(
 		"Interested-in-working-together?"
 	);
@@ -87,40 +89,37 @@ const Contact = (props: Props) => {
 		);
 	};
 
-	const animateAnchorRefOne = () => {
+	const animateAnchorRefOne = (hoverContactAnchor: boolean) => {
 		gsap.fromTo(
 			contactAnchorRefOne,
 			{
-				yPercent: 0,
-				duration: 1,
+				yPercent: hoverContactAnchor ? 0 : -100,
 				ease: "power1.out",
 				transform: "rotate3d(0)",
 				transformStyle: "preserve-3d",
 			},
 			{
-				yPercent: -100,
+				yPercent: hoverContactAnchor ? -100 : 0,
+				duration: 0.4,
 				transform: "rotate3d(1, 0, 0, 1turn)",
-				transformStyle: "preserve-3d",
-				onComplete: () => {
-					animateAnchorRefTwo();
-				}
+				transformStyle: "preserve-3d"
 			}
 		);
 	};
 
-	const animateAnchorRefTwo = () => {
+	const animateAnchorRefTwo = (hoverContactAnchor: boolean) => {
 		gsap.fromTo(
 			contactAnchorRefTwo,
 			{
-				yPercent: 100,
+				yPercent: hoverContactAnchor ? 0 : -100,
 				duration: 1,
 				ease: "power1.out",
-				transform: "transform: rotate3d(1, 0, 0, 1turn)",
+				// transform: "transform: rotate3d(1, 0, 0, -1turn)",
 				transformStyle: "preserve-3d",
 			},
 			{
-				yPercent: 0,
-				transform: "rotate3d(0)",
+				yPercent: hoverContactAnchor ? -100 : 0,
+				// transform: "rotate3d(0)",
 				transformStyle: "preserve-3d",
 			}
 		);
@@ -148,10 +147,17 @@ const Contact = (props: Props) => {
 		);
 	};
 
-	const triggerAnchorRef = () => {
-		animateAnchorRefOne();
-		// animateAnchorRefTwo();
+	const mouseHoverTriggerAnchorRef = () => {
+		setHoverContactAnchor(true);
+		animateAnchorRefOne(hoverContactAnchor());
+		animateAnchorRefTwo(hoverContactAnchor());
 	};
+
+	const mouseOutTriggerAnchorRef = () => {
+		setHoverContactAnchor(false);
+		animateAnchorRefOne(hoverContactAnchor());
+		animateAnchorRefTwo(hoverContactAnchor());
+	}
 
 	createEffect(() => {
 		const observer = new IntersectionObserver(
@@ -181,12 +187,6 @@ const Contact = (props: Props) => {
 
 	return (
 		<div ref={sectionRef} id="contact-section" class="contact--section">
-			{/* <div class="cube">
-				<div class="face front border border-red-50"></div>
-				<div class="face back border border-yellow-100"></div>
-				<div class="face left"></div>
-				<div class="face right"></div>
-			</div> */}
 			<div class="contact--subsection w-4/5 sm:my-0 sm:mx-auto px-3 transition-all duration-500 ease-in-out">
 				<div ref={openToOpportunityRef}>
 					<div class="relative flex flex-row items-center py-1.5 px-5 rounded-full border bg-gradient-to-b from-slate-600 to-slate-300 bg-clip-text text-transparent">
@@ -232,30 +232,16 @@ const Contact = (props: Props) => {
 				</div>
 
 				<div
-					onMouseEnter={triggerAnchorRef}
-					class="border overflow-y-hidden flex flex-col max-h-11"
+					onMouseEnter={mouseHoverTriggerAnchorRef}
+					onMouseLeave={mouseOutTriggerAnchorRef}
+					class="overflow-y-hidden flex flex-col max-h-11"
 				>
-					{/* <For each={contactLinkText()}>
-						{(text, index) => (
-							<a
-								ref={contactAnchorRef}
-								href="http://"
-								target="_blank"
-								rel="noopener noreferrer"
-								class="max-h-11 flex flex-row items-center justify-center w-full py-1 text-2xl text-orange-600"
-							>
-								{text}
-								{/* Book a call */}
-					{/* </a>
-						)}
-					</For> */}
-
 					<a
 						ref={contactAnchorRefOne}
 						href="http://"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="flex border border-yellow-500 flex-row items-center justify-center h-fit w-full py-1 text-2xl text-orange-600"
+						class="flex flex-row items-center justify-center h-fit w-full py-1 text-2xl text-orange-600"
 					>
 						Book a call
 					</a>
@@ -264,7 +250,7 @@ const Contact = (props: Props) => {
 						href="http://"
 						target="_blank"
 						rel="noopener noreferrer"
-						class="flex border border-yellow-500 flex-row h-fit items-center justify-center w-full py-1 text-2xl text-orange-600"
+						class="flex flex-row h-fit items-center justify-center w-full py-1 text-2xl text-orange-600"
 					>
 						Book a call
 					</a>

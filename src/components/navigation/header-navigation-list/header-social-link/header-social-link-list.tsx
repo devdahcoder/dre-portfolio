@@ -1,14 +1,14 @@
 import { For } from "solid-js";
-import { headerSocialMediaLink } from "../../../content/link-content";
-import { IHeaderSocialMediaLink } from "../../../interface";
+import { headerSocialMediaLink } from "../../../../../content/link-content";
+import { IHeaderSocialMediaLink } from "../../../../../interface";
 import HeaderSocialLinkItem from "./header-social-link-item";
 
 type Props = {
 	cursorType?: string;
-	// setCursorType: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const HeaderSocialLinkList = (props: Props) => {
+	const linkContainers: HTMLSpanElement[][] = [];
 
 	return (
 		<div class="flex flex-row items-center gap-x-4">
