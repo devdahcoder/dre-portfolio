@@ -187,7 +187,7 @@ const Contact = (props: Props) => {
 
 	return (
 		<div ref={sectionRef} id="contact-section" class="contact--section">
-			<div class="contact--subsection w-4/5 sm:my-0 sm:mx-auto px-3 transition-all duration-500 ease-in-out">
+			<div class="contact--subsection w-11/12 sm:my-0 sm:mx-auto px-3 transition-all duration-500 ease-in-out">
 				<div ref={openToOpportunityRef}>
 					<div class="relative flex flex-row items-center py-1.5 px-5 rounded-full border bg-gradient-to-b from-slate-600 to-slate-300 bg-clip-text text-transparent">
 						<div

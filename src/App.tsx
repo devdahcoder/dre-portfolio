@@ -30,7 +30,7 @@ const App: Component = () => {
 				videoRef={videoRef}
 				handleVideoPlay={handleVideoPlay}
 			/> */}
-			<Work />
+			{/* <Work /> */}
 			<Experience />
 			<Contact />
 			<Footer />
