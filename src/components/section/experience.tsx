@@ -1,6 +1,6 @@
 import ExperienceList from "../experience-list";
 import { experienceContent } from '../../../content/experience-content';
-import { Component, createEffect, createSignal, observable, onCleanup, onMount, Ref } from 'solid-js';
+import { createEffect, createSignal, onCleanup, onMount } from 'solid-js';
 import gsap from "gsap";
 
 
@@ -27,7 +27,6 @@ const Experience = (props: Props) => {
 			(entries) => {
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) setIsOpen(true);
-					// else setIsOpen(false);
 				});
 			},
 			{ threshold: 0.2 }

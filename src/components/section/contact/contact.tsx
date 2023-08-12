@@ -24,11 +24,16 @@ const Contact = (props: Props) => {
 		| ((el: HTMLAnchorElement) => void)
 		| undefined
 		| any;
+	let contactAnchorBorderTop: htmlDivElementRef;
+	let contactAnchorBorderRight: htmlDivElementRef;
+	let contactAnchorBorderBottom: htmlDivElementRef;
+	let contactAnchorBorderLeft: htmlDivElementRef;
 	let openToOpportunityIndicatorRef: htmlDivElementRef;
 	const interestedRefs: htmlDivElementRef[] = [];
 	const coffeeRefs: htmlDivElementRef[] = [];
 
-	const [hoverContactAnchor, setHoverContactAnchor] = createSignal<boolean>(false);
+	const [hoverContactAnchor, setHoverContactAnchor] =
+		createSignal<boolean>(false);
 
 	const [interestedText, setInterestedText] = createSignal<string>(
 		"Interested-in-working-together?"
@@ -82,9 +87,9 @@ const Contact = (props: Props) => {
 				duration: 1.5,
 				opacity: 1,
 				ease: "back.out",
-				onComplete: () => {
-					animateOpenToOpportunityIndicator();
-				},
+				// onComplete: () => {
+				// 	animateOpenToOpportunityIndicator();
+				// },
 			}
 		);
 	};
@@ -102,7 +107,7 @@ const Contact = (props: Props) => {
 				yPercent: hoverContactAnchor ? -100 : 0,
 				duration: 0.4,
 				transform: "rotate3d(1, 0, 0, 1turn)",
-				transformStyle: "preserve-3d"
+				transformStyle: "preserve-3d",
 			}
 		);
 	};
@@ -151,13 +156,41 @@ const Contact = (props: Props) => {
 		setHoverContactAnchor(true);
 		animateAnchorRefOne(hoverContactAnchor());
 		animateAnchorRefTwo(hoverContactAnchor());
+		gsap.fromTo(contactAnchorBorderTop, { width: 0 }, { width: "100%" });
+		gsap.fromTo(
+			contactAnchorBorderRight,
+			{ height: 0 },
+			{ height: "100%" }
+		);
+		gsap.fromTo(contactAnchorBorderBottom, { width: 0 }, { width: "100%" });
+		gsap.fromTo(
+			contactAnchorBorderLeft,
+			{ height: 0 },
+			{ height: "100%" }
+		);
 	};
 
 	const mouseOutTriggerAnchorRef = () => {
 		setHoverContactAnchor(false);
 		animateAnchorRefOne(hoverContactAnchor());
 		animateAnchorRefTwo(hoverContactAnchor());
-	}
+		gsap.fromTo(contactAnchorBorderTop, { width: "100%" }, { width: 0 });
+		gsap.fromTo(
+			contactAnchorBorderRight,
+			{ height: "100%" },
+			{ height: 0 }
+		);
+		gsap.fromTo(
+			contactAnchorBorderBottom,
+			{ width: "100%" },
+			{ width: 0 }
+		);
+		gsap.fromTo(
+			contactAnchorBorderLeft,
+			{ height: "100%" },
+			{ height: 0 }
+		);
+	};
 
 	createEffect(() => {
 		const observer = new IntersectionObserver(
@@ -192,10 +225,10 @@ const Contact = (props: Props) => {
 					<div class="relative flex flex-row items-center py-1.5 px-5 rounded-full border bg-gradient-to-b from-slate-600 to-slate-300 bg-clip-text text-transparent">
 						<div
 							ref={openToOpportunityIndicatorRef}
-							class="-z-10 rounded-full animate-pulse absolute top-1/2 -translate-x-0 -translate-y-1/2"
+							class="bg-green-400 absolute w-2 h-2 rounded-full animate-pulse top-1/2 -translate-x-0 -translate-y-1/2"
 						></div>
 
-						<p class="ml-3">Open to opportunities</p>
+						<p class="ml-4">Open to opportunities</p>
 					</div>
 				</div>
 
@@ -234,8 +267,24 @@ const Contact = (props: Props) => {
 				<div
 					onMouseEnter={mouseHoverTriggerAnchorRef}
 					onMouseLeave={mouseOutTriggerAnchorRef}
-					class="overflow-y-hidden flex flex-col max-h-11"
+					class="relative overflow-y-hidden flex flex-col max-h-11 p-1 cursor-pointer"
 				>
+					<div
+						class="absolute top-0 left-0 bg-white h-[0.01rem] z-0"
+						ref={contactAnchorBorderTop}
+					></div>
+					<div
+						class="absolute top-0 right-0 bg-white h-[0.01rem] w-[1px] z-0"
+						ref={contactAnchorBorderRight}
+					></div>
+					<div
+						class="absolute bottom-[1px] right-0 bg-white h-[0.01rem] z-0"
+						ref={contactAnchorBorderBottom}
+					></div>
+					<div
+						class="absolute left-0 bottom-0 bg-white h-[0.01rem] w-[1px] z-0"
+						ref={contactAnchorBorderLeft}
+					></div>
 					<a
 						ref={contactAnchorRefOne}
 						href="http://"

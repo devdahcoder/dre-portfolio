@@ -11,7 +11,6 @@ type Props = {
 };
 
 const ExperienceList: Component<Props> = (props: Props) => {
-
 	const experienceItemElements: HTMLLIElement[] = [];
 
 	const animateExperienceItem = (element: HTMLLIElement, index: number) => {
@@ -29,14 +28,12 @@ const ExperienceList: Component<Props> = (props: Props) => {
 	};
 
 	createEffect(() => {
-
 		if (props.isOpen === true) {
 			experienceItemElements.map((element, index) =>
 				animateExperienceItem(element, index)
 			);
 		}
-
-	})
+	});
 
 	return (
 		<div class="flex flex-col items-start gap-y-8">
