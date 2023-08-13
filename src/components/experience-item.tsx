@@ -1,4 +1,5 @@
 import { Component } from "solid-js";
+import ParallaxCharacter from "./parallax-character";
 
 type Props = {
 	index?: number;
@@ -7,12 +8,16 @@ type Props = {
 	href?: string;
 	detail?: string;
 	experienceItemElements: HTMLLIElement[];
+	experienceItemElementText: HTMLDivElement[][];
 };
 
 const ExperienceItem: Component<Props> = (props: Props) => {
 
 	return (
-		<li ref={(element) => props.experienceItemElements.push(element)} class="list-none experience--li">
+		<li
+			ref={(element) => props.experienceItemElements.push(element)}
+			class="list-none experience--li"
+		>
 			<div class="flex flex-col gap-y-5 experience--li--div--child w-full max-w-[90%] lg:max-w-[75%]">
 				<div class={`overflow-hidden flex flex-row items-center`}>
 					<div class={`text-5xl md:text-7xl font-bold text-white`}>

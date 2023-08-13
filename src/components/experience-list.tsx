@@ -12,18 +12,30 @@ type Props = {
 
 const ExperienceList: Component<Props> = (props: Props) => {
 	const experienceItemElements: HTMLLIElement[] = [];
+	const experienceItemElementText: HTMLSpanElement[][] = [];
 
 	const animateExperienceItem = (element: HTMLLIElement, index: number) => {
 		gsap.fromTo(
 			element,
-			{ y: 500, opacity: 0 },
+			{ y: 200, opacity: 0 },
 			{
 				y: 0,
 				opacity: 1,
-				delay: 0.4 + index * 0.3,
-				duration: 2.5,
-				ease: "power1.inOut",
+				delay: index * 0.3,
+				duration: 2,
+				ease: "power3.inOut",
 			}
+		);
+	};
+
+	const animateExperienceItemText = (
+		element: HTMLSpanElement[],
+		index: number
+	) => {
+		gsap.fromTo(
+			element,
+			{ y: 200, opacity: 0 },
+			{ y: 0, delay: 0.5 + index * 0.2, opacity: 1 }
 		);
 	};
 
@@ -32,21 +44,73 @@ const ExperienceList: Component<Props> = (props: Props) => {
 			experienceItemElements.map((element, index) =>
 				animateExperienceItem(element, index)
 			);
+			experienceItemElementText.map((element, index) =>
+				animateExperienceItemText(element, index)
+			);
 		}
 	});
+
+	console.log(experienceItemElementText);
 
 	return (
 		<div class="flex flex-col items-start gap-y-8">
 			<For each={props.experienceContent}>
 				{(experienceContent, index) => (
-					<ExperienceItem
-						index={experienceContent.index}
-						text={experienceContent.text}
-						detail={experienceContent.detail}
-						href={experienceContent.href}
-						id={experienceContent.id}
-						experienceItemElements={experienceItemElements}
-					/>
+					<li
+						ref={(element) => experienceItemElements.push(element)}
+						class="list-none experience--li"
+					>
+						<div class=" flex flex-col gap-y-5 experience--li--div--child w-full max-w-[90%] lg:max-w-[75%]">
+							<div
+								class={`overflow-hidden flex flex-row items-center`}
+							>
+								<div
+									class={`flex flex-row items-center flex-wrap text-5xl md:text-7xl font-bold text-white`}
+								>
+									{/* {experienceContent.text} */}
+									{/* flex flex-row items-center flex-wrap */}
+									<For
+										each={experienceContent.text?.split("")}
+									>
+										{(text) => (
+											<span
+												class={`h-max`}
+												ref={(element) => {
+													if (
+														!experienceItemElementText[
+															index()
+														]
+													) {
+														experienceItemElementText[
+															index()
+														] = [];
+													}
+													experienceItemElementText[
+														index()
+													].push(element!);
+												}}
+											>
+												{text === " " || text === "" ? (
+													<span class="mx-1"></span>
+												) : (
+													text
+												)}
+											</span>
+										)}
+									</For>
+								</div>
+							</div>
+							<div
+								class={`overflow-hidden flex flex-row items-center`}
+							>
+								<div
+									class={`text-white font-semibold text-xl bg-gradient-to-tl from-slate-300 to-gray-400 bg-clip-text text-transparent`}
+								>
+									{experienceContent.detail}
+								</div>
+							</div>
+						</div>
+					</li>
 				)}
 			</For>
 
