@@ -3,11 +3,12 @@ import { Component, createEffect, createSignal, onCleanup } from "solid-js";
 import { footerSocialMediaLink } from "../../../../content/link-content";
 import NavigationList from "../../navigation/navigation-list/navigation-list";
 import "./footer.scss";
+import FooterSocialMediaNavigationList from "./footer-social-media-navigation-list";
 
 type Props = {};
 
 const Footer: Component<Props> = (props: Props) => {
-	const [isOpen, setIsOpen] = createSignal<boolean | undefined>(false);
+	const [isOpen, setIsOpen] = createSignal<boolean>(false);
 
 	let sectionElementRef:
 		| HTMLDivElement
@@ -70,7 +71,7 @@ const Footer: Component<Props> = (props: Props) => {
 			<div ref={subSectionElementRef} class="footer--sub--container">
 				<div class="footer--content--container">
 					<div class="footer--social--media--links--navigation--container">
-						<NavigationList
+						<FooterSocialMediaNavigationList
 							link={footerSocialMediaLink}
 							isOpen={isOpen()}
 						/>

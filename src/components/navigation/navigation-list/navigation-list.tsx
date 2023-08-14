@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import { Component, For, Setter, Show, createEffect } from "solid-js";
+import { Component, For, Show, createEffect } from "solid-js";
 import { NAVIGATION_TYPE } from "../../../../enum";
 import { IHeaderNavigationLink } from "../../../../interface";
 import HeaderNavigationItem from "../header-navigation-item";
