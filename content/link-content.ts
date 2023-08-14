@@ -1,5 +1,5 @@
 import { NAVIGATION_TYPE } from "../enum";
-import { IHeaderNavigationLink, IHeaderSocialMediaLink } from "../interface";
+import { IContactLink, IHeaderNavigationLink, IHeaderSocialMediaLink } from "../interface";
 import { footerLinkClassName } from "../src/style/global";
 
 export const headerSocialMediaLink: IHeaderSocialMediaLink[] = [
@@ -75,3 +75,10 @@ export const headerNavigationLink: IHeaderNavigationLink[] = [
     },
 
 ];
+
+export const contactLink: IContactLink[] = [
+
+    { id: 1, text: "Book a call", class: "", href: "", target: "", rel: ""},
+    { id: 2, text: "Book a call", class: "", href: "", target: "", rel: ""}
+
+]

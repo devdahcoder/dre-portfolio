@@ -40,3 +40,20 @@ export interface IHeaderSocialMediaLink {
 }
 
 export interface IHeaderNavigationLink extends IHeaderSocialMediaLink { };
+
+type htmlDivElementRef =
+    | HTMLDivElement
+    | ((el: HTMLDivElement) => void)
+    | undefined
+    | any;
+
+export interface IContactLink {
+
+    id: number;
+    text: string;
+    class: string;
+    href: string;
+    target: string;
+    rel: string;
+
+}
