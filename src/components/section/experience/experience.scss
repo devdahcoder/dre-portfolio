@@ -1,0 +1,101 @@
+.experience--container {
+
+    padding: 8rem 0;
+    overflow-y: hidden;
+
+    .experience--sub--container {
+
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: start;
+        row-gap: 4rem;
+        width: 80%;
+        margin: 0 auto;
+        font-family: CabinetGrotesk, -apple-system, Satoshi,
+		BlinkMacSystemFont, Cantarell, Helvetica Neue, sans-serif;
+
+        .experience--header--container {
+
+            font-size: 1.875rem;
+            font-weight: 600;
+            color: rgb(219, 215, 215);
+        
+        }
+
+        .experience--list--container {
+
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            row-gap: 2rem;
+
+            .experience--list {
+            
+                list-style-type: none;
+
+                .experience--list--nth--child--container {
+
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: 1.25rem;
+
+                    .experience--list--nth--child--first {
+
+                        overflow: hidden;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+
+                        .experience--list--nth--child--second {
+
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            flex-wrap: wrap;
+                            font-weight: 700;
+                            font-size: 4.5rem;
+                            color: hsl(0, 0%, 100%);
+                            width: 73%;
+
+                            .experience--content--text {
+
+                                height: max-content;
+                                line-height: 6rem;
+                            
+                            }
+                        
+                        }
+                    
+                    }
+
+                    .experience--content-detail--container {
+
+                        overflow-y: hidden;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+
+                        .experience--content--detail {
+                    
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            font-size: 1.25rem;
+                            font-weight: 500;
+                            color: hsl(0, 0%, 100%);
+
+                        }
+                    
+                    }
+                
+                }
+
+            }
+        
+        }
+    
+    }
+
+}

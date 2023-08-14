@@ -11,18 +11,18 @@ export const experienceContent: IExperience[] = [
         id: 2,
         text: "Oaklane.live - UI/UX Designer",
         href: "",
-        detail: "Aug, 2022 - present - Fulltime"
+        detail: "May, 2022 - present - Fulltime"
     },
     {
         id: 3,
         text: "Freelance - Visual Designer",
         href: "",
-        detail: "Aug, 2022 - present - Fulltime"
+        detail: "Oct, 2019 - Sept, 2022 - Fulltime",
     },
     {
         id: 4,
         text: "ASIN5lab - Visual Designer",
         href: "",
-        detail: "Aug, 2022 - present - Fulltime"
+        detail: "Jul, 2020 - Oct, 2020 - Fulltime"
     },
 ]

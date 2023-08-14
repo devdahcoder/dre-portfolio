@@ -4,7 +4,7 @@ import { onMount, type Component } from "solid-js";
 import gsap from "gsap";
 import HeroText from "./components/hero-text";
 import Contact from "./components/section/contact/contact";
-import Experience from "./components/section/experience";
+import Experience from "./components/section/experience/experience";
 import Footer from "./components/section/footer/footer";
 import Header from "./components/section/header/header";
 import Work from "./components/section/work";

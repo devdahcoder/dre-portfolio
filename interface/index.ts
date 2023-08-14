@@ -26,6 +26,7 @@ export interface IExperience {
     text: string;
     href?: string;
     detail?: string;
+    class?: string;
 }
 
 export interface IHeaderSocialMediaLink {
