@@ -1,7 +1,8 @@
-import { Component, createEffect, createSignal, onCleanup } from "solid-js";
-import { footerSocialMediaLink } from "../../../content/link-content";
-import NavigationList from "../navigation/navigation-list/navigation-list";
 import gsap from "gsap";
+import { Component, createEffect, createSignal, onCleanup } from "solid-js";
+import { footerSocialMediaLink } from "../../../../content/link-content";
+import NavigationList from "../../navigation/navigation-list/navigation-list";
+import "./footer.scss";
 
 type Props = {};
 
@@ -26,10 +27,11 @@ const Footer: Component<Props> = (props: Props) => {
 		gsap.fromTo(
 			subSectionElementRef,
 			{
-				yPercent: isOpen ? 150 : 0,
+				yPercent: isOpen ? 200 : 0,
 				delay: isOpen ? 0.3 : 0,
 				opacity: isOpen ? 0 : 1,
-				duration: isOpen ? 1 : 0,
+				duration: isOpen ? 1.5 : 0,
+				ease: isOpen ? "power3.out" : "power3.in",
 			},
 			{
 				yPercent: isOpen ? 0 : 200,
@@ -64,20 +66,17 @@ const Footer: Component<Props> = (props: Props) => {
 	});
 
 	return (
-		<div ref={sectionElementRef} class="overflow-y-hidden">
-			<div
-				ref={subSectionElementRef}
-				class="border-t-[0.01rem] bg-[#151515] px-3"
-			>
-				<div class="flex flex-col lg:flex-row items-start sm:items-center justify-between py-5 w-4/5 sm:mx-auto sm:my-0 gap-y-5">
-					<div class="flex flex-row items-center ">
+		<div ref={sectionElementRef} class="footer--container">
+			<div ref={subSectionElementRef} class="footer--sub--container">
+				<div class="footer--content--container">
+					<div class="footer--social--media--links--navigation--container">
 						<NavigationList
 							link={footerSocialMediaLink}
 							isOpen={isOpen()}
 						/>
 					</div>
 
-					<div class="text-white">
+					<div class="footer--collaboration--text--container">
 						<p>
 							Collaborative work of{" "}
 							<span>

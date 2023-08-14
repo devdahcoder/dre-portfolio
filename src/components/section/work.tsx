@@ -5,7 +5,7 @@ type Props = {};
 
 const Work = (props: Props) => {
 	return (
-		<section id={`works`}class={`py-28`}>
+		<div id={`works`} class={`overflow-hidden py-28`}>
 			<div
 				class={`w-4/5 mt-0 mx-auto flex flex-col items-center gap-y-20 !px-3`}
 			>
@@ -16,7 +16,7 @@ const Work = (props: Props) => {
 				</div>
 				<WorkList />
 			</div>
-		</section>
+		</div>
 	);
 };
 

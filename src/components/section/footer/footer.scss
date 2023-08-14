@@ -1,0 +1,43 @@
+@use "../../../style/_variables.scss";
+
+.footer--container {
+
+    overflow-y: hidden;
+    width: 100%;
+
+    .footer--sub--container {
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border-top: 1px solid hsl(0, 0%, 100%);
+
+        .footer--content--container {
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 80%;
+            margin: 0 auto;
+            padding: 1.25rem 0;
+
+            .footer--social--media--links--navigation--container {
+
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            
+            }
+
+            .footer--collaboration--text--container {
+            
+                color: hsl(0, 0%, 100%);
+
+            }
+        
+        }
+
+    }
+
+}
