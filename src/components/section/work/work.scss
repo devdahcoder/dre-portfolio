@@ -1,0 +1,53 @@
+.work--container {
+
+    // overflow-y: hidden;
+    padding: 7rem 0;
+
+    .work--sub--container {
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        row-gap: 5rem;
+        width: 80%;
+        margin: 0 auto;
+
+        .work--header--container {
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            .work--header--content {
+
+                font-weight: 700;
+                font-size: 1.875rem;
+                font-family: CabinetGrotesk, -apple-system, Satoshi, BlinkMacSystemFont, Cantarell, Helvetica Neue, sans-serif;
+            
+            }
+        
+        }
+
+        .work--list--container {
+
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            row-gap: 9rem;
+
+            .work--item--container {
+
+                transform-style: preserve-3d;
+
+                .work--item--content--container {}
+            
+            }
+        
+        }
+
+    }
+
+}

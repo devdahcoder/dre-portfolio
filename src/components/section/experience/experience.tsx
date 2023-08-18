@@ -22,13 +22,13 @@ const Experience = (props: Props) => {
 
 	const [isOpen, setIsOpen] = createSignal<boolean>(false);
 
-	onMount(() => {
-		gsap.fromTo(
-			experienceTitleRef,
-			{ xPercent: -200, duration: 1 },
-			{ xPercent: 0, duration: 2 }
-		);
-	});
+	// onMount(() => {
+	// 	gsap.fromTo(
+	// 		experienceTitleRef,
+	// 		{ xPercent: -200, duration: 1 },
+	// 		{ xPercent: 0, duration: 2 }
+	// 	);
+	// });
 
 	createEffect(() => {
 		const observer = new IntersectionObserver(

@@ -1,18 +1,33 @@
+import gsap from "gsap";
 import { Component } from "solid-js";
 
 type Props = {
-    class?: string;
-    width?: string;
-    height?: string;
-}
+	class?: string;
+	width?: string;
+	height?: string;
+};
 
 const Folder: Component<Props> = (props) => {
+	let folderElement:
+		| gsap.TweenTarget
+		| SVGPathElement
+		| ((el: SVGPathElement) => void)
+		| undefined
+		| any;
 
-    const svgStyle = props.class ?? '';
-    const svgWidth = props.width ?? '24';
-    const svgHeight = props.height ?? '24';
+	const svgStyle = props.class ?? "";
+	const svgWidth = props.width ?? "24";
+	const svgHeight = props.height ?? "24";
 
-    return (
+	const triggerSvgFolderAnimation = () => {
+		gsap.fromTo(
+			folderElement,
+			{ marginBottom: "0px" },
+			{ marginBottom: "20px", position: "absolute" }
+		);
+	};
+
+	return (
 		<svg
 			class={svgStyle}
 			width={svgWidth}
@@ -20,8 +35,10 @@ const Folder: Component<Props> = (props) => {
 			viewBox={`0 0 ${svgWidth} ${svgHeight}`}
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
+			onMouseOver={triggerSvgFolderAnimation}
 		>
 			<path
+				ref={folderElement}
 				d="M21.0169 7.99175C21.4148 8.55833 20.9405 9.25 20.2482 9.25H3C2.44772 9.25 2 8.80228 2 8.25V6.42C2 3.98 3.98 2 6.42 2H8.74C10.37 2 10.88 2.53 11.53 3.4L12.93 5.26C13.24 5.67 13.28 5.72 13.86 5.72H16.65C18.4546 5.72 20.0516 6.61709 21.0169 7.99175Z"
 				fill=""
 			/>
@@ -31,5 +48,5 @@ const Folder: Component<Props> = (props) => {
 			/>
 		</svg>
 	);
-}
-export default Folder
+};
+export default Folder;

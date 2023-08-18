@@ -7,7 +7,7 @@ import Contact from "./components/section/contact/contact";
 import Experience from "./components/section/experience/experience";
 import Footer from "./components/section/footer/footer";
 import Header from "./components/section/header/header";
-import Work from "./components/section/work";
+import Work from "./components/section/work/work";
 import TextScroll from "./components/text-scroll";
 import Time from "./components/time";
 

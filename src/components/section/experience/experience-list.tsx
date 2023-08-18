@@ -8,19 +8,19 @@ import { render } from "solid-js/web";
 
 type Props = {
 	experienceContent: IExperience[];
-	isOpen?: boolean;
+	isOpen: boolean;
 };
 
-const animateExperienceItem = (element: HTMLLIElement, index: number) => {
+const animateExperienceItem = (element: HTMLLIElement, index: number, isOpen: boolean) => {
 	gsap.fromTo(
 		element,
-		{ y: 200, opacity: 0 },
+		{ y: isOpen ? 200 : 0, opacity: isOpen ? 0 : 0 },
 		{
-			y: 0,
-			opacity: 1,
+			y: isOpen ? 0 : 200,
+			opacity: isOpen ? 1 : 0,
 			delay: index * 0.3,
 			duration: 2,
-			ease: "power3.inOut",
+			ease: "power3.out"
 		}
 	);
 };
@@ -48,9 +48,9 @@ const animateExperienceDetail = (element: HTMLDivElement, index: number) => {
 		{ y: 100, opacity: 0 },
 		{
 			y: 0,
-			delay: 0.2 + index * 0.2,
+			delay: index * 0.2,
 			opacity: 1,
-			duration: 1,
+			duration: 0.5,
 			ease: "power2.out",
 		}
 	);
@@ -62,29 +62,23 @@ const ExperienceList: Component<Props> = (props: Props) => {
 	const experienceDetails: HTMLDivElement[][] = [];
 
 	createEffect(() => {
-		
-		if (props.isOpen === true) {
-
-			experienceItemElements.forEach((element, index) =>
-				
-				// animateExperienceItem(element, index)
+		if (props.isOpen) {
+			experienceItemElements.forEach((element, index) => {
+				animateExperienceItem(element, index, props.isOpen);
 				experienceDetails[index].forEach((element, index) =>
-					
 					animateExperienceDetail(element, index)
-
-				)
-
-			);
+				);
+			});
 
 			experienceItemElementText.forEach((element, index) => {
-
 				animateExperienceItemText(element, index);
-
 			});
-			
-		}
 
+		}
 	});
+
+	console.log(experienceDetails);
+	
 
 	return (
 		<div class="experience--list--container">
@@ -158,8 +152,7 @@ const ExperienceList: Component<Props> = (props: Props) => {
 													}
 												}}
 											>
-												{text === " " ||
-												text === "" ? (
+												{text === " " || text === "" ? (
 													<span class="mx-1"></span>
 												) : (
 													text
