@@ -7,12 +7,12 @@ type Props = {
 
 const ImageContainer = (props: Props) => {
 	return (
-		<div class="block w-full">
-			<div>
+		<div class="work--item--image--container">
+			<div class="work--item--image--sub--container">
 				<img
 					src={`${props.imageLink}`}
 					alt="image"
-					// class="w-full h-full absolute top-0 left-0 select-none object-cover"
+					class={`${props.class}`}
 				/>
 			</div>
 		</div>

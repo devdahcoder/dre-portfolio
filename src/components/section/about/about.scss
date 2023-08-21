@@ -1,0 +1,30 @@
+.about--section {
+
+    padding: 5rem 0rm;
+
+    .about--sub--container {
+
+        display: flex;
+        flex-direction: column;
+        row-gap: 4rem;
+        width: 80%;
+        margin: 0 auto;
+
+        .about--header--container {
+
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.875rem;
+            font-family: CabinetGrotesk, -apple-system, Satoshi,
+		BlinkMacSystemFont, Cantarell, Helvetica Neue, sans-serif;
+        
+        }
+    
+    }
+
+}

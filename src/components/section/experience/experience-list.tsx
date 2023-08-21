@@ -1,10 +1,7 @@
 import gsap from "gsap";
 import { Component, For, createEffect } from "solid-js";
-import { experienceContent } from "../../../../content/experience-content";
 import Folder from "../../../../icon/folder";
 import { IExperience } from "../../../../interface";
-import ParallaxCharacter from "../../parallax-character";
-import { render } from "solid-js/web";
 
 type Props = {
 	experienceContent: IExperience[];
@@ -65,9 +62,6 @@ const ExperienceList: Component<Props> = (props: Props) => {
 		if (props.isOpen) {
 			experienceItemElements.forEach((element, index) => {
 				animateExperienceItem(element, index, props.isOpen);
-				experienceDetails[index].forEach((element, index) =>
-					animateExperienceDetail(element, index)
-				);
 			});
 
 			experienceItemElementText.forEach((element, index) => {

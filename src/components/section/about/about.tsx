@@ -1,22 +1,21 @@
-import React, { useRef } from "react";
-import Wave from "../../../icon/wave";
-import ImageContainer from "../image-container";
-import Video from "../video";
+import Wave from "../../../../icon/wave";
+import ImageContainer from "../../image-container";
+import Video from "../../video";
+import "./about.scss";
+import { ScrollTrigger } from "gsap/all";
 
 type Props = {
-	cursorType: string;
-	setCursorType: React.Dispatch<React.SetStateAction<string>>;
-	videoRef?: React.MutableRefObject<HTMLVideoElement>;
-	handleVideoPlay: () => void;
+	// cursorType: string;
+	// setCursorType: React.Dispatch<React.SetStateAction<string>>;
+	// videoRef?: React.MutableRefObject<HTMLVideoElement>;
+	// handleVideoPlay: () => void;
 };
 
 const About = (props: Props) => {
-	const { cursorType, setCursorType, videoRef, handleVideoPlay } = props;
-
 	return (
-		<section id="about"class="py-20 ">
-			<divclass="flex flex-col gap-y-16 w-11/12 sm:w-4/5 mx-auto my-0">
-				<divclass="text-center font-bold font-cabinetgrotesk text-3xl bg-gradient-to-tl from-zinc-300 to-gray-500 bg-clip-text text-transparent">
+		<section id="about" class="about--section">
+			<div class="about--sub--container">
+				<div class="about--header--container bg-gradient-to-tl from-zinc-300 to-gray-500 bg-clip-text text-transparent">
 					<p>About</p>
 				</div>
 
@@ -24,8 +23,8 @@ const About = (props: Props) => {
 					class={`flex flex-col lg:flex-row px-3 items-center lg:items-start justify-center gap-x-0 md:gap-x-16 lg:gap-x-28 gap-y-20 
 				lg:gap-y-0 `}
 				>
-					<divclass="flex flex-col w-full max-w-[32rem] gap-y-12">
-						<Video
+					<div class="flex flex-col w-full max-w-[32rem] gap-y-12">
+						{/* <Video
 							videoRef={videoRef}
 							src={`./video/dre.mp4`}
 							type={`video/mp4`}
@@ -36,7 +35,7 @@ const About = (props: Props) => {
 							cursorType={cursorType}
 							setCursorType={setCursorType}
 							onClick={handleVideoPlay}
-						/>
+						/> */}
 					</div>
 
 					<div
@@ -46,8 +45,8 @@ const About = (props: Props) => {
 						{/* <div class="text-3xl sm:text-5xl font-bold font-cabinetgrotesk text-white">
 						<p>Damilare Adigun</p>
 					</div> */}
-						<divclass="flex flex-col text-base font-medium gap-y-8 text-white">
-							<divclass="flex flex-row items-center gap-x-2 tracking-widest-[0.5rem]">
+						<div class="flex flex-col text-base font-medium gap-y-8 text-white">
+							<div class="flex flex-row items-center gap-x-2 tracking-widest-[0.5rem]">
 								<p>Hello</p>
 								<span>
 									<Wave />
@@ -55,7 +54,7 @@ const About = (props: Props) => {
 							</div>
 
 							<div>
-								<pclass="tracking-[0.07rem] leading-6">
+								<p class="tracking-[0.07rem] leading-6">
 									I am a Product Designer with over two years
 									of experience designing for Saas,
 									Healthcare, E-commerce, Ed-tech, Logistics
@@ -65,7 +64,7 @@ const About = (props: Props) => {
 							</div>
 
 							<div>
-								<pclass="tracking-[0.07rem] leading-6">
+								<p class="tracking-[0.07rem] leading-6">
 									I have contributed to the launching of
 									several Early-Stage Products as a Freelancer
 									from MVP to Lead-Generating Platforms. I
@@ -77,7 +76,7 @@ const About = (props: Props) => {
 								</p>
 							</div>
 							<div>
-								<pclass="tracking-[0.07rem] leading-6">
+								<p class="tracking-[0.07rem] leading-6">
 									.........and I love Coffee ☕
 								</p>
 							</div>

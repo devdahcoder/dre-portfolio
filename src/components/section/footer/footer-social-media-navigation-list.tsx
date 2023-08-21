@@ -137,16 +137,10 @@ const FooterSocialMediaNavigationList: Component<Props> = (props) => {
 											<span
 												class={`footer--social--media--navigation--link--text h-max`}
 												ref={(element) => {
-													if (
-														!linkContainers[index()]
-													) {
-														linkContainers[
-															index()
-														] = [];
+													if (!linkContainers[index()]) {
+														linkContainers[index()] = [];
 													}
-													linkContainers[
-														index()
-													].push(element!);
+													linkContainers[index()].push(element!);
 												}}
 											>
 												{text === " " ||

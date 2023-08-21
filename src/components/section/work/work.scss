@@ -1,53 +1,151 @@
 .work--container {
 
-    // overflow-y: hidden;
-    padding: 7rem 0;
+	overflow-y: hidden;
+	padding: 7rem 0;
 
-    .work--sub--container {
+	.work--sub--container {
 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        row-gap: 5rem;
-        width: 80%;
-        margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		row-gap: 5rem;
+		width: 80%;
+		margin: 0 auto;
 
-        .work--header--container {
+		.work--header--container {
 
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
 
-            .work--header--content {
+			.work--header--content {
 
-                font-weight: 700;
-                font-size: 1.875rem;
-                font-family: CabinetGrotesk, -apple-system, Satoshi, BlinkMacSystemFont, Cantarell, Helvetica Neue, sans-serif;
-            
-            }
-        
-        }
+				font-weight: 700;
+				font-size: 1.875rem;
+				font-family: CabinetGrotesk, -apple-system, Satoshi,
+					BlinkMacSystemFont, Cantarell, Helvetica Neue, sans-serif;
 
-        .work--list--container {
+			}
 
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            row-gap: 9rem;
+		}
 
-            .work--item--container {
+		.work--list--container {
 
-                transform-style: preserve-3d;
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			row-gap: 9rem;
 
-                .work--item--content--container {}
-            
-            }
-        
-        }
+			.work--item--container {
 
-    }
+                display: flex;
+                flex-direction: column-reverse;
+                row-gap: 2.5rem;
+				transform-style: preserve-3d;
+                cursor: pointer;
+
+				.work--item--content--container {
+
+                    .work--item--content--image--container {
+
+                        .work--item--image--container {
+
+                            display: block;
+                            position: relative;
+                            width: 100%;
+
+                            .work--item--image--sub--container {
+
+                                // padding-bottom: 100%;
+                                display: block;
+                                position: relative;
+                                overflow: hidden;
+                                width: 35rem;
+                                height: 35rem;
+                                border-radius: 0.5rem;
+
+                                .work--item--image {
+                                    // position: absolute;
+                                    // top: 0;
+                                    // left: 0;
+                                    user-select: none;
+                                    object-fit: cover;
+                                    height: 100%;
+                                    width: 100%;
+                                    filter: blur(0.2rem);
+                                    transition: filter 0.5s ease-out;
+
+                                    &:hover {
+                            
+                                        // transform: scale3d(1.1, 1.1, 1);
+                                        animation: image-hover-animation 0.5s ease-out forwards;
+
+                                    }
+
+                                    @keyframes image-hover-animation {
+
+                                        0% {
+
+                                            filter: blur(0.2rem);
+                                            transform: scale3d(1, 1, 1);
+
+                                        }
+
+                                        100% {
+
+                                            filter: blur(0rem);
+                                            transform: scale3d(1.1, 1.1, 1);
+
+                                        }
+
+                                    }
+
+                                }
+
+                            }
+
+                        }
+                    
+                    }
+
+                    .work--item--content--text--header--container {
+
+                        position: absolute;
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        align-items: center;
+                        column-gap: 0.5rem;
+                        left: -14rem;
+                        top: 1.25rem;
+                        font-size: 3rem;
+                        font-weight: 600;
+                        pointer-events: none;
+                    
+                    }
+
+                    .work--item--content--text--container {
+
+                        overflow: hidden;
+                        position: absolute;
+                        top: 1.25rem;
+                        right: -15rem;
+                        width: 100%;
+                        font-size: 1.125rem;
+                        font-weight: 400;
+                        max-width: 23rem;
+                    
+                    }
+
+				}
+
+			}
+
+		}
+
+	}
 
 }

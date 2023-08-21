@@ -1,13 +1,13 @@
 import gsap from "gsap";
 import { createSignal } from "solid-js";
 
-interface Props { }
+interface Props {}
 
 type htmlDivElementRef =
 	| HTMLDivElement
 	| ((el: HTMLDivElement) => void)
 	| undefined
-    | any;
+	| any;
 
 const animateAnchorRefOne = (
 	element: HTMLAnchorElement,
@@ -52,8 +52,7 @@ const animateAnchorRefTwo = (
 };
 
 const ContactLink = (props: Props) => {
-
-    let contactAnchorRefOne:
+	let contactAnchorRefOne:
 		| HTMLAnchorElement
 		| ((el: HTMLAnchorElement) => void)
 		| undefined
@@ -66,19 +65,24 @@ const ContactLink = (props: Props) => {
 	let contactAnchorBorderTop: htmlDivElementRef;
 	let contactAnchorBorderRight: htmlDivElementRef;
 	let contactAnchorBorderBottom: htmlDivElementRef;
-    let contactAnchorBorderLeft: htmlDivElementRef;
-    
-    const [hoverContactAnchor, setHoverContactAnchor] =
+	let contactAnchorBorderLeft: htmlDivElementRef;
+
+	const [hoverContactAnchor, setHoverContactAnchor] =
 		createSignal<boolean>(false);
 
-    const mouseHoverTriggerAnchorRef = () => {
+	const mouseHoverTriggerAnchorRef = () => {
 		setHoverContactAnchor(true);
 		animateAnchorRefOne(contactAnchorRefOne, hoverContactAnchor());
 		animateAnchorRefTwo(contactAnchorRefTwo, hoverContactAnchor());
 		gsap.fromTo(
 			contactAnchorBorderTop,
 			{ width: 0, display: "none" },
-			{ width: "100%", display: "block", duration: 1, ease: "bounce.out" }
+			{
+				width: "100%",
+				display: "block",
+				duration: 0.8,
+				ease: "power3.out",
+			}
 		);
 		gsap.fromTo(
 			contactAnchorBorderRight,
@@ -86,12 +90,21 @@ const ContactLink = (props: Props) => {
 			{
 				height: "100%",
 				display: "block",
-				duration: 1,
-				ease: "bounce.out",
+				duration: 0.8,
+				ease: "power3.out",
 			}
 		);
 		gsap.fromTo(contactAnchorBorderBottom, { width: 0 }, { width: "100%" });
-		gsap.fromTo(contactAnchorBorderLeft, { height: 0 }, { height: "100%" });
+		gsap.fromTo(
+			contactAnchorBorderLeft,
+			{ height: 0, display: "none" },
+			{
+				height: "100%",
+				display: "block",
+				duration: 0.8,
+				ease: "power3.out",
+			}
+		);
 	};
 
 	const mouseOutTriggerAnchorRef = () => {
@@ -107,14 +120,14 @@ const ContactLink = (props: Props) => {
 		gsap.fromTo(contactAnchorBorderBottom, { width: "100%" }, { width: 0 });
 		gsap.fromTo(contactAnchorBorderLeft, { height: "100%" }, { height: 0 });
 	};
-  
-    return (
+
+	return (
 		<div
 			onMouseEnter={mouseHoverTriggerAnchorRef}
 			onMouseLeave={mouseOutTriggerAnchorRef}
 			class="contact--link--container"
 		>
-			<div
+			{/* <div
 				class="contact--link--border"
 				ref={contactAnchorBorderTop}
 			></div>
@@ -122,14 +135,14 @@ const ContactLink = (props: Props) => {
 				class="contact--link--border"
 				ref={contactAnchorBorderRight}
 			></div>
-			{/* <div
+			<div
 						class="contact--link--border"
 						ref={contactAnchorBorderBottom}
-					></div> */}
-			{/* <div
-						class="contact--link--border"
-						ref={contactAnchorBorderLeft}
-					></div> */}
+					></div>
+			<div
+				class="contact--link--border"
+				ref={contactAnchorBorderLeft}
+			></div> */}
 			<a
 				ref={contactAnchorRefOne}
 				href="http://"
@@ -150,7 +163,6 @@ const ContactLink = (props: Props) => {
 			</a>
 		</div>
 	);
-    
 };
 
 export default ContactLink;

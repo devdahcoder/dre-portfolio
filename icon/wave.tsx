@@ -1,4 +1,3 @@
-import React from 'react';
 
 type Props = {
     class?: string;
@@ -6,18 +5,14 @@ type Props = {
     height?: string;
 }
 
-const Wave = ({class, width, height }: Props) => {
-
-    const svgStyle = class ?? '';
-    const svgWidth = width ?? '24';
-    const svgHeight = height ?? '24';
+const Wave = (props: Props) => {
 
     return (
 		<svg
-			class={svgStyle}
-			width={svgWidth}
-			height={svgHeight}
-			viewBox={`0 0 ${svgWidth} ${svgHeight}`}
+			class={props.class}
+			width={props.width}
+			height={props.height}
+			viewBox={`0 0 ${props.width} ${props.height}`}
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
 		>
