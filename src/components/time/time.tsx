@@ -1,8 +1,35 @@
 import gsap from "gsap";
-import { createEffect, createSignal, onCleanup, onMount } from "solid-js";
-import { getCurrentTime } from "../../helper/getCurrentTime";
+import { createEffect, createSignal, onCleanup } from "solid-js";
+import { getCurrentTime } from "../../../helper/getCurrentTime";
+import "./time.scss";
 
 interface Props {}
+
+const addTimeAnimation = (element: HTMLDivElement) => {
+	gsap.fromTo(
+		element,
+		{
+			yPercent: 100,
+			transform: "rotateX(80deg)",
+			transformStyle: "preserve-3d",
+		},
+		{
+			yPercent: 0,
+			duration: 1,
+			ease: "power1.out",
+			transform: "rotateX(0deg)",
+			transformStyle: "preserve-3d",
+		}
+	);
+};
+
+const removeTimeAnimation = (element: HTMLDivElement) => {
+	gsap.fromTo(
+		element,
+		{ yPercent: 0 },
+		{ yPercent: -100, duration: 1, ease: "power1.out" }
+	);
+};
 
 const Time = (props: Props) => {
 	let timeContainerRef:
@@ -16,39 +43,13 @@ const Time = (props: Props) => {
 	const [timeHour, setTimeHour] = createSignal<number>(0);
 	const [timeMinute, setTimeMinute] = createSignal<string>("");
 
-	const addTimeAnimation = () => {
-		gsap.fromTo(
-			timeContainerRef,
-			{
-				yPercent: 100,
-				transform: "rotateX(80deg)",
-				transformStyle: "preserve-3d",
-			},
-			{
-				yPercent: 0,
-				duration: 1,
-				ease: "power1.out",
-				transform: "rotateX(0deg)",
-				transformStyle: "preserve-3d",
-			}
-		);
-	};
-
-	const removeTimeAnimation = () => {
-		gsap.fromTo(
-			timeContainerRef,
-			{ yPercent: 0 },
-			{ yPercent: -100, duration: 1, ease: "power1.out" }
-		);
-	};
-
 	createEffect(() => {
 		const interval = setInterval(() => {
 			const { timeFormat, timeHour, timeMinute, timeSecond } =
 				getCurrentTime();
 			// Remove current timeMinute number
 			if (timeSecond == 59) {
-				removeTimeAnimation();
+				removeTimeAnimation(timeContainerRef);
 			}
 			setTimeFormat(timeFormat);
 			setTimeHour(timeHour);
@@ -63,28 +64,25 @@ const Time = (props: Props) => {
 		timeMinute();
 
 		// Add new minute number
-		addTimeAnimation();
+		addTimeAnimation(timeContainerRef);
 	});
 
 	return (
-		<div class="fixed bottom-5 right-5 pointer-events-none z-50">
-			<div class="flex flex-row items-center text-sm animate-pulse text-white">
+		<div class="time--container">
+			<div class="time--sub--container">
 				<div class="">
 					<span>{timeHour()}</span>
 				</div>
 				:{" "}
-				<div class="overflow-hidden h-5">
-					<div
-						ref={timeContainerRef}
-						class=""
-					>
+				<div class="time--content--container">
+					<div ref={timeContainerRef} class="">
 						{timeMinute()}
 					</div>
 				</div>{" "}
 				<div>
 					<span>{timeFormat()}</span>
 				</div>{" "}
-				<div class="ml-1">
+				<div class="time--location--container">
 					<span>GMT, Lagos, Nigeria.</span>
 				</div>
 			</div>

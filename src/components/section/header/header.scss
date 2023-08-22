@@ -1,6 +1,9 @@
+@use "../../../style/variables.scss" as *;
+
+
 .header--container {
 
-    border-bottom: 1px solid hsl(0, 0%, 100%);
+    border-bottom: 1px solid $primary-white;
 
     .header--sub--container {
 
@@ -33,7 +36,7 @@
                     justify-content: center;
                     font-size: 0.875rem;
                     font-weight: 500;
-                    color: hsl(0, 5%, 81%);
+                    color: $primary-white;
                     width: 100%;
                     padding: 0.5rem 0.75rem;
                 
@@ -60,6 +63,7 @@
                 font-weight: 500;
                 color: hsl(0, 5%, 81%);
                 padding: 0.5rem 0.75rem;
+                cursor: pointer;
 
             }
         

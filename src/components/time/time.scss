@@ -1,0 +1,33 @@
+@use "../../style/mixins.scss" as *;
+@use "../../style//variables.scss" as *;
+
+.time--container {
+
+    position: fixed;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    pointer-events: none;
+    z-index: 50;
+
+    .time--sub--container {
+
+        @include flex-row-align;
+        font-size: 0.875rem;
+        color: $primary-white;
+
+        .time--content--container {
+
+            overflow: hidden;
+            height: 1.25rem
+        
+        }
+
+        .time--location--container {
+        
+            margin-left: 0.25rem
+        
+        }
+    
+    }
+
+}

@@ -6,10 +6,8 @@ import Contact from "./components/section/contact/contact";
 import Experience from "./components/section/experience/experience";
 import Footer from "./components/section/footer/footer";
 import Header from "./components/section/header/header";
-import HeroText from "./components/section/hero/hero-text";
 import Work from "./components/section/work/work";
-import TextScroll from "./components/text-scroll";
-import Time from "./components/time";
+import Time from "./components/time/time";
 
 // ** Packages
 import gsap from "gsap";
@@ -19,9 +17,7 @@ const App: Component = () => {
 	return (
 		<div class="">
 			<Time />
-			<Header
-			// cursorType={cursorType} setCursorType={setCursorType}
-			/>
+			<Header />
 			<Hero
 			// cursorType={cursorType}
 			// setCursorType={setCursorType}
