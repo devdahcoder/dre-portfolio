@@ -1,12 +1,12 @@
 import { onMount, type Component } from "solid-js";
 
 // ** Components
-import HeroText from "./components/hero-text";
 import About from "./components/section/about/about";
 import Contact from "./components/section/contact/contact";
 import Experience from "./components/section/experience/experience";
 import Footer from "./components/section/footer/footer";
 import Header from "./components/section/header/header";
+import HeroText from "./components/section/hero/hero-text";
 import Work from "./components/section/work/work";
 import TextScroll from "./components/text-scroll";
 import Time from "./components/time";

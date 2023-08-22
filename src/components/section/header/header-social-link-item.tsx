@@ -1,4 +1,5 @@
 import { Component, JSXElement } from "solid-js";
+import "./header.scss";
 
 type Props = {
 	id: string | number;
@@ -12,13 +13,13 @@ type Props = {
 
 const HeaderSocialLinkItem: Component<Props> = (props) => {
 	return (
-		<div class={`flex flex-row items-center ${props.containerClassName}`}>
+		<div class={`header--social--link--item--container`}>
 			<a
 				href={`${props.href}`}
 				target="_blank"
 				rel="noopener noreferrer"
 				style={props.style}
-				class={`w-full flex flex-row items-center px-3 py-2 text-sm font-medium bg-gradient-to-tl from-slate-200 to-gray-100 bg-clip-text text-transparent ${props.class}`}
+				class={`header--social--link--item--link`}
 			>
 				{props.text}
 			</a>

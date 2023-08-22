@@ -17,12 +17,14 @@ const animateAnchorRefOne = (
 		element,
 		{
 			yPercent: hoverContactAnchor ? 0 : -100,
+			opacity: hoverContactAnchor ? 1 : 0,
 			ease: "power1.out",
 			transform: "rotate3d(0)",
 			transformStyle: "preserve-3d",
 		},
 		{
-			yPercent: hoverContactAnchor ? -100 : 0,
+			// yPercent: hoverContactAnchor ? -100 : 0,
+			opacity: hoverContactAnchor ? 0 : 1,
 			duration: 0.4,
 			transform: "rotate3d(1, 0, 0, 1turn)",
 			transformStyle: "preserve-3d",

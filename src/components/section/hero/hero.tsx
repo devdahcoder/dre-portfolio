@@ -1,10 +1,8 @@
-import { For, Setter, createSignal, onMount } from "solid-js";
-import CircleText from "../../cirlcle-text";
-import HeroText from "../../hero-text";
-import NameRender from "../../name-render";
-import SectionContainer from "../../section-container";
-import "./hero.scss";
 import gsap from "gsap";
+import { For, Setter, Show, createSignal, onMount } from "solid-js";
+import CircleText from "./hero-cirlcle-text";
+import HeroText from "./hero-text";
+import "./hero.scss";
 
 type Props = {
 	cursorType?: string;
@@ -18,7 +16,7 @@ const Hero = (props: Props) => {
 	const [name] = createSignal<string[]>(["Damilare", "Adigun"]);
 
 	const [heroText, setHeroText] = createSignal(
-		"Product & Interaction Designer with over three years of experience solving problems with a cup of coffee somewhere in Lagos. designing for Saas, Healthcare, E-commerce & Web3.0. Currently, I work in a Product team at ShawnExchange"
+		"Product & Interaction Designer with over three years of experience solving problems with a cup of coffee somewhere in Lagos. designing for Saas, Healthcare, E-commerce & Web3.0. Currently, I work in a Product team at"
 	);
 
 	const heroTextArray = heroText().split(" ");
@@ -103,6 +101,34 @@ const Hero = (props: Props) => {
 
 				<div class="hero--text--container">
 					<div class="hero--text--sub--container bg-gradient-to-tl from-slate-300 to-gray-400 bg-clip-text text-transparent">
+						<For each={heroTextArray}>
+							{(text, index) => (
+								<>
+									<HeroText
+										index={index()}
+										text={text}
+										children={
+											<Show
+												when={
+													text.toLowerCase() === "at"
+												}
+											>
+												<span class="ml-1">
+													<a
+														href="https://www.shawn.exchange/"
+														target="_blank"
+														rel="noopener noreferrer"
+														class=" text-orange-500 no-underline"
+													>
+														ShawnExchange
+													</a>
+												</span>
+											</Show>
+										}
+									/>
+								</>
+							)}
+						</For>
 						{/* {heroTextArray?.map((text: string, index: number) => (
 							<div key={index}>
 								{text.toLowerCase() !== "shawnexchange" && (
@@ -138,14 +164,10 @@ const Hero = (props: Props) => {
 									</HeroText>
 								)}
 							</div>
-						))} */}
+						))}  */}
 					</div>
 
-					{/* <CircleText
-						text={"- Download - Resume"}
-						cursorType={cursorType}
-						setCursorType={setCursorType}
-					/> */}
+					<CircleText text={"- Download - Resume"} />
 				</div>
 			</div>
 		</section>

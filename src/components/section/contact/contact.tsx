@@ -3,6 +3,7 @@ import { For, createEffect, createSignal, onCleanup } from "solid-js";
 import ParallaxCharacter from "../../parallax-character";
 import "./contact.scss";
 import ContactLink from "./contact-link";
+import { ScrollTrigger, ScrollSmoother } from 'gsap/all';
 
 type Props = {};
 
@@ -20,19 +21,15 @@ const animateParallax = (
 	gsap.fromTo(
 		elementRef,
 		{
-			scale: 0,
 			opacity: 0,
-			delay: 0.5,
-			yPercent: 70,
-			force3D: true,
+			yPercent: 100,
 		},
 		{
 			duration: 0.5,
 			opacity: 1,
-			scale: 1,
-			delay: delay ?? 0.2 + index * 0.1,
+			delay: delay ?? 0.1 + index * 0.1,
 			yPercent: 0,
-			ease: "back.out",
+			ease: "power3.out",
 		}
 	);
 };
@@ -96,13 +93,27 @@ const Contact = (props: Props) => {
 	const interestedRefs: htmlDivElementRef[] = [];
 	const coffeeRefs: htmlDivElementRef[] = [];
 
-	const [interestedText, setInterestedText] = createSignal<string>(
-		"Interested-in-working-together?"
-	);
+	const [interestedText, setInterestedText] = createSignal<string[]>([
+		"Interested",
+		"-",
+		"in",
+		"-",
+		"working",
+		"-",
+		"together?",
+	]);
 
-	const [coffeeText, setCoffeeText] = createSignal<string>(
-		"Let-me-buy-you-coffee"
-	);
+	const [coffeeText, setCoffeeText] = createSignal<string[]>([
+		"Let",
+		"-",
+		"me",
+		"-",
+		"buy",
+		"-",
+		"you",
+		"-",
+		"coffee",
+	]);
 
 	const [showCoffeeEmoji, setShowCoffeeEmoji] = createSignal<boolean>(false);
 
@@ -112,12 +123,12 @@ const Contact = (props: Props) => {
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
 						animateOpenToOpportunity(openToOpportunityRef);
-						interestedRefs.forEach((ref, index) =>
-							animateParallax(ref, index)
-						);
-						coffeeRefs.forEach((ref, index) =>
-							animateParallax(ref, index, 0.8 + index * 0.1)
-						);
+						// interestedRefs.forEach((ref, index) =>
+						// 	animateParallax(ref, index)
+						// );
+						// coffeeRefs.forEach((ref, index) =>
+						// 	animateParallax(ref, index, 0.1 + index * 0.1)
+						// );
 						observer.unobserve(entry.target); // Stop observing once the section is in view (if you only want it to trigger once)
 					}
 				});
@@ -156,7 +167,7 @@ const Contact = (props: Props) => {
 						subContainerClassName={`min-h-max flex flex-row items-center overflow-hidden flex-wrap`}
 						class={`!my-1 text-5xl bg-gradient-to-r from-gray-400 to-zinc-500 bg-clip-text text-transparent`}
 						refElementContainer={interestedRefs}
-						textArray={interestedText().split("")}
+						textArray={interestedText()}
 					/>
 
 					<div class={`flex flex-row gap-x-3`}>
@@ -164,7 +175,7 @@ const Contact = (props: Props) => {
 							subContainerClassName={`min-h-max flex flex-row items-center overflow-hidden flex-wrap`}
 							class={`!my-1 text-5xl bg-gradient-to-r from-gray-400 to-zinc-500 bg-clip-text text-transparent`}
 							refElementContainer={coffeeRefs}
-							textArray={coffeeText().split("")}
+							textArray={coffeeText()}
 						/>
 
 						<div class="flex flex-row items-center justify-center align-middle">

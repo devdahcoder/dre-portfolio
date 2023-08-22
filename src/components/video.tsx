@@ -1,4 +1,4 @@
-import React from "react";
+import { Component, Setter } from "solid-js";
 
 type Props = {
 	autoPlay?: boolean;
@@ -8,24 +8,23 @@ type Props = {
 	type?: string;
 	controls?: boolean;
 	class?: string;
-	style?: React.CSSProperties;
 	disablePictureInPicture?: boolean;
 	height?: string;
 	width?: string;
-	videoRef?: React.MutableRefObject<HTMLVideoElement>;
-	cursorType: string;
-	setCursorType: React.Dispatch<React.SetStateAction<string>>;
-	onClick?: () => void;
+	videoRef?: HTMLVideoElement;
+	// cursorType: string;
+	// setCursorType: Setter<string>;
+	// onClick?: () => void;
 };
 
-const Video = (props: Props) => {
-	const { cursorType, setCursorType, onClick } = props;
+const Video: Component<Props> = (props: Props) => {
+	// const { cursorType, setCursorType, onClick } = props;
 	const classStyle = props.class ? props.class : "";
 
 	return (
 		<div
-			onMouseOver={() => setCursorType("video--hover")}
-			onMouseOut={() => setCursorType("")}
+			// onMouseOver={() => setCursorType("video--hover")}
+			// onMouseOut={() => setCursorType("")}
 			class="block w-full"
 		>
 			<div
@@ -34,15 +33,14 @@ const Video = (props: Props) => {
 				<video
 					ref={props.videoRef}
 					class="w-full h-full absolute top-0 left-0 select-none object-cover"
-					style={props?.style}
-					autoPlay={props?.autoPlay}
+					autoplay={props?.autoPlay}
 					muted={props?.muted}
 					loop={props?.loop}
 					controls={props?.controls}
-					disablePictureInPicture={props?.disablePictureInPicture}
+					// disablePictureInPicture={props?.disablePictureInPicture}
 					height={props?.height}
 					width={props?.width}
-					onClick={onClick}
+					// onClick={onClick}
 				>
 					<source src={props?.src} type={props?.type} />
 				</video>

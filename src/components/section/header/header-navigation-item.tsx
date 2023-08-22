@@ -1,5 +1,5 @@
 import { Component, JSXElement } from "solid-js";
-import { IStyle } from "../../../interface";
+import { IStyle } from "../../../../interface";
 
 type Props = {
 	id: string | number;
@@ -14,8 +14,10 @@ type Props = {
 
 const HeaderNavigationItem: Component<Props> = (props) => {
 	return (
-		<div class={`flex flex-row items-center ${props.containerClassName}`}>
-			{props.renderLink}
+		<div
+			class={`header--navigation--item--container ${props.containerClassName}`}
+		>
+			{props.text}
 		</div>
 	);
 };

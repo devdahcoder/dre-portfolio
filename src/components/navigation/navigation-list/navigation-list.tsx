@@ -2,7 +2,7 @@ import gsap from "gsap";
 import { Component, For, Show, createEffect } from "solid-js";
 import { NAVIGATION_TYPE } from "../../../../enum";
 import { IHeaderNavigationLink } from "../../../../interface";
-import HeaderNavigationItem from "../header-navigation-item";
+import HeaderNavigationItem from "../../section/header/header-navigation-item";
 import "./navigation-list.scss";
 
 type Props = {
@@ -11,7 +11,6 @@ type Props = {
 };
 
 const NavigationList: Component<Props> = (props) => {
-	
 	const linkContainers: HTMLSpanElement[][] = [];
 	const anchorBorderElements: HTMLDivElement[] = [];
 
@@ -124,7 +123,11 @@ const NavigationList: Component<Props> = (props) => {
 												index()
 											);
 										}}
-										onMouseLeave={() => triggerCloseAnchorBorderAnimation(index())}
+										onMouseLeave={() =>
+											triggerCloseAnchorBorderAnimation(
+												index()
+											)
+										}
 										href={`https://${link.href}`}
 										target="_blank"
 										rel="noopener noreferrer"

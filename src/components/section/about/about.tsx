@@ -24,18 +24,18 @@ const About = (props: Props) => {
 				lg:gap-y-0 `}
 				>
 					<div class="flex flex-col w-full max-w-[32rem] gap-y-12">
-						{/* <Video
-							videoRef={videoRef}
+						<Video
+							// videoRef={videoRef}
 							src={`./video/dre.mp4`}
 							type={`video/mp4`}
 							muted={true}
 							loop={true}
 							autoPlay={true}
 							class={"h-[340px] rounded-lg"}
-							cursorType={cursorType}
-							setCursorType={setCursorType}
-							onClick={handleVideoPlay}
-						/> */}
+							// cursorType={cursorType}
+							// setCursorType={setCursorType}
+							// onClick={handleVideoPlay}
+						/>
 					</div>
 
 					<div
