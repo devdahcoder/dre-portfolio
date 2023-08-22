@@ -6,24 +6,8 @@ import FooterSocialMediaNavigationItem from "./footer-social-media-navigation-it
 import "./footer.scss";
 
 type Props = {
-	link?: IHeaderNavigationLink[];
 	isOpen: boolean;
-};
-
-const animateAnchor = (element: HTMLElement, index: number) => {
-	gsap.fromTo(
-		element,
-		{ scale: 1, color: "#FFFFFF" },
-		{
-			scale: 1.2,
-			duration: 0.1,
-			delay: 0.1 + index * 0.1,
-			color: "#F96F21",
-			onComplete: () => {
-				resetAnchor(element);
-			},
-		}
-	);
+	link?: IHeaderNavigationLink[];
 };
 
 const resetAnchor = (element: HTMLElement) => {
@@ -53,6 +37,22 @@ const closeAnchorBorder = (element: HTMLElement) => {
 		width: "0px",
 		ease: "bounce.out",
 	});
+};
+
+const animateAnchor = (element: HTMLElement, index: number) => {
+	gsap.fromTo(
+		element,
+		{ scale: 1, color: "#ffffff" },
+		{
+			scale: 1.2,
+			duration: 0.1,
+			delay: 0.1 + index * 0.1,
+			color: "#F96F21",
+			onComplete: () => {
+				resetAnchor(element);
+			},
+		}
+	);
 };
 
 const animateAnchorSection = (elements: HTMLElement[], index: number) => {
@@ -107,62 +107,18 @@ const FooterSocialMediaNavigationList: Component<Props> = (props) => {
 					<Show when={link.type === NAVIGATION_TYPE.LINK}>
 						<FooterSocialMediaNavigationItem
 							id={link.id}
-							class={link.class}
+							index={index()}
 							href={link.href}
 							icon={link.icon}
 							text={link.text}
+							class={link.class}
 							style={link.style}
+							linkContainers={linkContainers}
+							anchorBorderElements={anchorBorderElements}
 							containerClassName={link.containerClassName}
-							renderLink={
-								<a
-									onMouseEnter={() => {
-										triggerAnchorAnimation(index());
-										triggerOpenAnchorBorderAnimation(
-											index()
-										);
-									}}
-									onMouseLeave={() =>
-										triggerCloseAnchorBorderAnimation(
-											index()
-										)
-									}
-									href={`https://${link.href}`}
-									target="_blank"
-									rel="noopener noreferrer"
-									style={link.style?.style}
-									class={`footer--social--media--navigation--link ${link.class}`}
-								>
-									<For each={link.text?.split("")}>
-										{(text) => (
-											<span
-												class={`footer--social--media--navigation--link--text h-max`}
-												ref={(element) => {
-													if (!linkContainers[index()]) {
-														linkContainers[index()] = [];
-													}
-													linkContainers[index()].push(element!);
-												}}
-											>
-												{text === " " ||
-												text === "-" ||
-												text === "" ? (
-													<span class="footer--social--media--navigation--link--text--space mx-1"></span>
-												) : (
-													text
-												)}
-											</span>
-										)}
-									</For>
-
-									<div
-										ref={(element) =>
-											(anchorBorderElements[index()] =
-												element!)
-										}
-										class="footer--social--media--navigation--link--border"
-									></div>
-								</a>
-							}
+							triggerAnchorAnimation={triggerAnchorAnimation}
+							triggerOpenAnchorBorderAnimation={triggerOpenAnchorBorderAnimation}
+							triggerCloseAnchorBorderAnimation={triggerCloseAnchorBorderAnimation}
 						/>
 					</Show>
 				)}

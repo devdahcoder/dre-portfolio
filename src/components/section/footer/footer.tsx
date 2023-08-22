@@ -6,42 +6,37 @@ import "./footer.scss";
 import FooterSocialMediaNavigationList from "./footer-social-media-navigation-list";
 
 type Props = {};
+type RefType =
+	| HTMLDivElement
+	| ((el: HTMLDivElement) => void)
+	| undefined
+	| any;
+
+const animateSection = (element: RefType, isOpen: boolean) => {
+	gsap.fromTo(
+		element,
+		{
+			yPercent: isOpen ? 200 : 0,
+			delay: isOpen ? 0.3 : 0,
+			opacity: isOpen ? 0 : 1,
+			duration: isOpen ? 1.5 : 0,
+			ease: isOpen ? "power3.out" : "power3.in",
+		},
+		{
+			yPercent: isOpen ? 0 : 200,
+			duration: 1.5,
+			ease: "power2.out",
+			opacity: isOpen ? 1 : 0,
+		}
+	);
+};
 
 const Footer: Component<Props> = (props: Props) => {
 	const [isOpen, setIsOpen] = createSignal<boolean>(false);
 
-	let sectionElementRef:
-		| HTMLDivElement
-		| ((el: HTMLDivElement) => void)
-		| undefined
-		| any;
+	let sectionElementRef: RefType;
 
-	let subSectionElementRef:
-		| HTMLDivElement
-		| ((el: HTMLDivElement) => void)
-		| undefined
-		| any;
-
-	const linkClassName = `text-white hover:text-blue-700 hover:underline`;
-
-	const animateSection = (isOpen: boolean) => {
-		gsap.fromTo(
-			subSectionElementRef,
-			{
-				yPercent: isOpen ? 200 : 0,
-				delay: isOpen ? 0.3 : 0,
-				opacity: isOpen ? 0 : 1,
-				duration: isOpen ? 1.5 : 0,
-				ease: isOpen ? "power3.out" : "power3.in",
-			},
-			{
-				yPercent: isOpen ? 0 : 200,
-				duration: 1.5,
-				ease: "power2.out",
-				opacity: isOpen ? 1 : 0,
-			}
-		);
-	};
+	let subSectionElementRef: RefType;
 
 	createEffect(() => {
 		const observer = new IntersectionObserver(
@@ -49,10 +44,10 @@ const Footer: Component<Props> = (props: Props) => {
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
 						setIsOpen(true);
-						animateSection(true);
+						animateSection(subSectionElementRef, isOpen());
 					} else {
 						setIsOpen(false);
-						animateSection(false);
+						animateSection(subSectionElementRef, isOpen());
 					}
 				});
 			},
@@ -85,7 +80,7 @@ const Footer: Component<Props> = (props: Props) => {
 									href="https://www.linkedin.com/in/damilare007/"
 									target="_blank"
 									rel="noopener noreferrer"
-									class={`${linkClassName}`}
+									class={`footer--collaboration--link`}
 								>
 									Damilare
 								</a>
@@ -96,7 +91,7 @@ const Footer: Component<Props> = (props: Props) => {
 									href="https://www.linkedin.com/in/olamide-adigun-200/"
 									target="_blank"
 									rel="noopener noreferrer"
-									class={`${linkClassName}`}
+									class={`footer--collaboration--link`}
 								>
 									Olamide
 								</a>

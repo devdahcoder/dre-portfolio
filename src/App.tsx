@@ -10,7 +10,6 @@ import Work from "./components/section/work/work";
 import Time from "./components/time/time";
 
 // ** Packages
-import gsap from "gsap";
 import Hero from "./components/section/hero/hero";
 
 const App: Component = () => {
@@ -18,11 +17,7 @@ const App: Component = () => {
 		<div class="">
 			<Time />
 			<Header />
-			<Hero
-			// cursorType={cursorType}
-			// setCursorType={setCursorType}
-			// hasPageCompletedLoading={hasPageCompletedLoading}
-			/>
+			<Hero />
 			{/* <TextScroll /> */}
 			<About
 			// cursorType={cursorType}

@@ -2,7 +2,7 @@ import gsap from "gsap";
 import { Component, For, Show, createEffect } from "solid-js";
 import { NAVIGATION_TYPE } from "../../../../enum";
 import { IHeaderNavigationLink } from "../../../../interface";
-import HeaderNavigationItem from "../../section/header/header-navigation-item";
+import HeaderNavigationItemLink from "../../section/header/header-navigation-item-link";
 import "./navigation-list.scss";
 
 type Props = {
@@ -107,7 +107,7 @@ const NavigationList: Component<Props> = (props) => {
 				{(link, index) => (
 					<div>
 						<Show when={link.type === NAVIGATION_TYPE.LINK}>
-							<HeaderNavigationItem
+							<HeaderNavigationItemLink
 								id={link.id}
 								class={link.class}
 								href={link.href}
