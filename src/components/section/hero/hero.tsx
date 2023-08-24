@@ -3,6 +3,7 @@ import { For, Setter, Show, createSignal, onMount } from "solid-js";
 import CircleText from "./hero-cirlcle-text";
 import HeroText from "./hero-text";
 import "./hero.scss";
+import HeroName from "./hero-name";
 
 type Props = {
 	cursorType?: string;
@@ -45,74 +46,15 @@ const Hero = (props: Props) => {
 			<div class={`hero--sub--section`}>
 				{/* text-[16vw] sm:text-[13vw] md:text-[10.7vw] */}
 				<div class="hero--name--container font-cabinetgrotesk">
-					<For each={name()}>
-						{(text: string, index) => (
-							<div
-								ref={(element: HTMLDivElement) =>
-									heroNameContainerElement.push(element)
-								}
-								class="hero--name--sub--container"
-							>
-								<div class="hero--name--span--container">
-									<For each={text?.split(" ")}>
-										{(text) => (
-											<div
-												ref={(element) => {
-													if (
-														!heroNameElement[
-															index()
-														]
-													) {
-														heroNameElement[
-															index()
-														] = [];
-													}
-
-													heroNameElement[
-														index()
-													].push(element);
-												}}
-												class="hero--name"
-											>
-												{text}
-											</div>
-										)}
-									</For>
-								</div>
-							</div>
-						)}
-					</For>
+					<HeroName
+						name={name()}
+						heroNameContainerElement={heroNameContainerElement}
+						heroNameElement={heroNameElement}
+					/>
 				</div>
 
 				<div class="hero--text--container">
-					<div class="hero--text--sub--container bg-gradient-to-tl from-slate-300 to-gray-400 bg-clip-text text-transparent">
-						<For each={heroText().split(" ")}>
-							{(props, index) => (
-								<div class={`hero--text`}>
-									<div ref={(element) => heroTextElement.push(element)} class={`text-white`}>
-										{props}
-										<Show
-											when={
-												props.toLowerCase() === "at"
-											}
-										>
-											<span class="ml-1">
-												<a
-													href="https://www.shawn.exchange/"
-													target="_blank"
-													rel="noopener noreferrer"
-													class=" text-orange-500 no-underline"
-												>
-													ShawnExchange
-												</a>
-											</span>
-										</Show>
-									</div>
-								</div>
-							)}
-						</For>
-					</div>
-
+					<HeroText heroTextElement={heroTextElement} heroText={heroText().split(" ")} />
 					<CircleText text={"- Download - Resume"} />
 				</div>
 			</div>
