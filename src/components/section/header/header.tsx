@@ -19,15 +19,12 @@ const animateSection = (element: RefType, isOpen: boolean) => {
 	gsap.fromTo(
 		element,
 		{
-			// opacity: 0,
-			duration: 1.5,
-			yPercent: -100,
+			yPercent: -200,
 			ease: "power3.out",
 		},
 		{
 			yPercent: 0,
 			duration: 1.5,
-			// opacity: 1,
 			ease: "power2.out",
 		}
 	);

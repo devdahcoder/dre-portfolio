@@ -36,8 +36,8 @@ const HeaderNavigationItemStaticLink: Component<Props> = (props: Props) => {
                     index={props.index}
                     character={props.text?.split(" ")}
                     linkContainers={props.linkContainers}
-                    // subContainerClass={"header--social--media--navigation--link--text"}
-                    // containerClass={"header--social--media--navigation--link--text--container"}
+                    subContainerClass={"header--section--navigation--link--text"}
+                    containerClass={"header--section--navigation--link--text--container"}
                 />
 
         </div>

@@ -63,7 +63,7 @@ export const footerSocialMediaLink: IHeaderSocialMediaLink[] = [
 export const headerNavigationLink: IHeaderNavigationLink[] = [
     {
         id: 1,
-        text: "About Me",
+        text: "About - Me",
         href: "#about",
         type: NAVIGATION_TYPE.STATIC
     },

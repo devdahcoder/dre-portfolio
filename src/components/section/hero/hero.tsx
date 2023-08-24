@@ -11,48 +11,33 @@ type Props = {
 };
 
 const Hero = (props: Props) => {
-	let heroNameContainerElement: HTMLDivElement[] = [];
-	let heroNameElement: HTMLSpanElement[][] = [];
-	const [name] = createSignal<string[]>(["Damilare", "Adigun"]);
 
+	const heroNameElement: HTMLSpanElement[][] = [];
+	const heroNameContainerElement: HTMLDivElement[] = [];
+	const heroTextElement: HTMLDivElement[] = [];
+	const [name] = createSignal<string[]>(["Damilare", "Adigun"]);
 	const [heroText, setHeroText] = createSignal(
+		// "Experienced Product & Interaction Designer with a track record of over three years, adept at problem-solving fueled by a cup of coffee, situated in the vibrant city of Lagos. Proficient in crafting solutions for diverse domains including SaaS, Healthcare, E-commerce, and Web3.0. Presently, I contribute my skills within a dynamic Product team at"
 		"Product & Interaction Designer with over three years of experience solving problems with a cup of coffee somewhere in Lagos. designing for Saas, Healthcare, E-commerce & Web3.0. Currently, I work in a Product team at"
 	);
-
-	const heroTextArray = heroText().split(" ");
 
 	onMount(() => {
 		heroNameContainerElement.forEach((element, index) => {
 			gsap.fromTo(
 				element,
-				{ y: 300 },
+				{ yPercent: 100 },
 				{
-					y: 0,
-					duration: 1.5,
+					yPercent: 0,
+					duration: 2,
 					delay: 0.2 + index * 0.3,
-					// onComplete: () => {
-					// 	heroNameElement[index].forEach((element, index) => {
-					// 		gsap.fromTo(
-					// 			element,
-					// 			{
-					// 				y: 90,
-					// 				opacity: 0,
-					// 				ease: "power3.out",
-					// 				duration: 1,
-					// 			},
-					// 			{
-					// 				y: 0,
-					// 				duration: 1,
-					// 				delay: 0.2 + index * 0.3,
-					// 				opacity: 1,
-					// 				ease: "power3.out",
-					// 			}
-					// 		);
-					// 	});
-					// },
+					ease: "power3.out"
 				}
 			);
 		});
+		heroTextElement.forEach((element, index) => {
+			gsap.fromTo(element, {yPercent: 200, opacity: 0, rotate: "10deg"},
+                {yPercent: 0, duration: 2.5, delay: 0.01 + index * 0.01, opacity: 1, rotate: "0deg", ease: "power3.out"})
+		})
 	});
 
 	return (
@@ -101,70 +86,31 @@ const Hero = (props: Props) => {
 
 				<div class="hero--text--container">
 					<div class="hero--text--sub--container bg-gradient-to-tl from-slate-300 to-gray-400 bg-clip-text text-transparent">
-						<For each={heroTextArray}>
-							{(text, index) => (
-								<>
-									<HeroText
-										index={index()}
-										text={text}
-										children={
-											<Show
-												when={
-													text.toLowerCase() === "at"
-												}
-											>
-												<span class="ml-1">
-													<a
-														href="https://www.shawn.exchange/"
-														target="_blank"
-														rel="noopener noreferrer"
-														class=" text-orange-500 no-underline"
-													>
-														ShawnExchange
-													</a>
-												</span>
-											</Show>
-										}
-									/>
-								</>
+						<For each={heroText().split(" ")}>
+							{(props, index) => (
+								<div class={`hero--text`}>
+									<div ref={(element) => heroTextElement.push(element)} class={`text-white`}>
+										{props}
+										<Show
+											when={
+												props.toLowerCase() === "at"
+											}
+										>
+											<span class="ml-1">
+												<a
+													href="https://www.shawn.exchange/"
+													target="_blank"
+													rel="noopener noreferrer"
+													class=" text-orange-500 no-underline"
+												>
+													ShawnExchange
+												</a>
+											</span>
+										</Show>
+									</div>
+								</div>
 							)}
 						</For>
-						{/* {heroTextArray?.map((text: string, index: number) => (
-							<div key={index}>
-								{text.toLowerCase() !== "shawnexchange" && (
-									<HeroText
-										key={index}
-										index={index}
-										text={text}
-										containerClassName={"w-max"}
-										hasPageCompletedLoading={
-											hasPageCompletedLoading
-										}
-									/>
-								)}
-								{text.toLowerCase() === "shawnexchange" && (
-									<HeroText
-										key={index}
-										index={index}
-										containerClassName={"w-max"}
-										hasPageCompletedLoading={
-											hasPageCompletedLoading
-										}
-									>
-										<span class="ml-1">
-											<a
-												href="https://www.shawn.exchange/"
-												target="_blank"
-												rel="noopener noreferrer"
-												class=" text-orange-500 no-underline"
-											>
-												ShawnExchange
-											</a>
-										</span>
-									</HeroText>
-								)}
-							</div>
-						))}  */}
 					</div>
 
 					<CircleText text={"- Download - Resume"} />

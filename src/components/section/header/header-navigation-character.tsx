@@ -26,7 +26,7 @@ const HeaderNavigationCharacter: Component<Props> = (props: Props) => {
                     {text === " " ||
                     text === "-" ||
                     text === "" ?
-                        (<span class={`${props.subContainerClass}`}></span>)
+                        (<span class={`${props.subContainerClass} mx-1`}></span>)
                         :
                         (text)
                     }

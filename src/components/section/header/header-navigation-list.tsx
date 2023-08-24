@@ -61,13 +61,14 @@ const animateAnchorSection = (elements: HTMLElement[], index: number) => {
         elements,
         {
             opacity: 0,
-            yPercent: 200,
+            yPercent: 100,
         },
         {
-            duration: 1,
             opacity: 1,
             delay: 0.1 + index * 0.2,
             yPercent: 0,
+            duration: 1,
+            ease: "power2.out"
         }
     );
 };
