@@ -123,12 +123,12 @@ const Contact = (props: Props) => {
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
 						animateOpenToOpportunity(openToOpportunityRef);
-						// interestedRefs.forEach((ref, index) =>
-						// 	animateParallax(ref, index)
-						// );
-						// coffeeRefs.forEach((ref, index) =>
-						// 	animateParallax(ref, index, 0.1 + index * 0.1)
-						// );
+						interestedRefs.forEach((ref, index) =>
+							animateParallax(ref, index)
+						);
+						coffeeRefs.forEach((ref, index) =>
+							animateParallax(ref, index, 0.1 + index * 0.1)
+						);
 						observer.unobserve(entry.target); // Stop observing once the section is in view (if you only want it to trigger once)
 					}
 				});

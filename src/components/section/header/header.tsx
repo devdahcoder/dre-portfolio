@@ -3,6 +3,7 @@ import gsap from "gsap";
 import HeaderNavigationList from "./header-navigation-list";
 import { Component, Setter, createEffect, createSignal, onCleanup } from "solid-js";
 import {headerNavigationLink, headerSocialMediaLink} from "../../../../content/link-content";
+import {elementObserver} from "../../../../hook";
 
 interface Props {
 	cursorType?: string;
@@ -38,26 +39,16 @@ const Header: Component<Props> = (props: Props) => {
 	let subSectionElementRef: HTMLDivElement | ((el: HTMLDivElement) => void) | undefined;
 
 	createEffect(() => {
-		const observer = new IntersectionObserver(
-			(entries: IntersectionObserverEntry[]) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						setIsOpen(true)
-						animateSection(sectionElementRef, isOpen());
-						observer.unobserve(entry.target);
-					}
-				});
-			},
-			{ threshold: 0.2 }
+		elementObserver(sectionElementRef,
+			(entry, observer) => {
+				if (entry.isIntersecting) {
+					setIsOpen(true)
+					animateSection(sectionElementRef, isOpen());
+					observer.unobserve(entry.target);
+				}
+			}
 		);
-
-		// @ts-ignore
-		observer.observe(sectionElementRef);
-
-		onCleanup(() => {
-			observer.disconnect();
-		});
-	});
+	})
 
 	return (
 		<div ref={sectionElementRef} class="header--container">

@@ -1,6 +1,6 @@
 // import { useEffect, useState } from "react";
 
-import { createEffect, onCleanup } from "solid-js";
+import {createEffect, onCleanup} from "solid-js";
 
 // export const useCursor = () => {
 //     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -27,27 +27,47 @@ import { createEffect, onCleanup } from "solid-js";
 //     return { mousePosition, cursorType, setCursorType };
 // }
 
+// export const elementObserver = (
+//     ElementRef: HTMLElement | HTMLDivElement | HTMLSpanElement,
+//     animationFunction: () => void,
+//     entriesCallbackFunction: (entry: IntersectionObserverEntry) => void
+// ) => {
+//     createEffect(() => {
+//         const observer = new IntersectionObserver(
+//             (entries) => {
+//                 entries.forEach((entry) => entriesCallbackFunction(entry));
+//             },
+//             { threshold: 0.2 }
+//         ); // Adjust the threshold as needed for the intersection area
+//
+//         observer.observe(ElementRef);
+//
+//         onCleanup(() => {
+//             observer.disconnect(); // Clean up the observer when the component unmounts
+//         });
+//     });
+// };
+
 export const elementObserver = (
-    sectionElementRef: HTMLDivElement,
-    animationFunction: () => void
+    ElementRef: HTMLDivElement | ((el: HTMLDivElement) => void) | undefined | any,
+    entriesCallbackFunction: (entry: IntersectionObserverEntry, observer: IntersectionObserver) => void,
+    options?: IntersectionObserverInit // Optional IntersectionObserver options
 ) => {
-    createEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        animationFunction(); // Call the animation function when the section is in view
-                        observer.unobserve(entry.target); // Stop observing once the section is in view (if you only want it to trigger once)
-                    }
-                });
-            },
-            { threshold: 0.2 }
-        ); // Adjust the threshold as needed for the intersection area
+    if (!ElementRef) {
+        return; // Do nothing if ElementRef is not valid
+    }
 
-        observer.observe(sectionElementRef);
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => entriesCallbackFunction(entry, observer));
+        },
+        options || {threshold: 0.2} // Use provided options or default threshold
+    );
 
-        onCleanup(() => {
-            observer.disconnect(); // Clean up the observer when the component unmounts
-        });
+    observer.observe(ElementRef);
+
+    onCleanup(() => {
+        observer.disconnect();
     });
+
 };

@@ -13,6 +13,7 @@ import Time from "./components/time/time";
 import Hero from "./components/section/hero/hero";
 
 const App: Component = () => {
+
 	return (
 		<div class="">
 			<Time />
