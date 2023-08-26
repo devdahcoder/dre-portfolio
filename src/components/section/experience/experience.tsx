@@ -3,6 +3,7 @@ import { createEffect, createSignal, onCleanup, onMount } from "solid-js";
 import { experienceContent } from "../../../../content/experience-content";
 import ExperienceList from "./experience-list";
 import "./experience.scss";
+import {elementObserver} from "../../../../hook";
 
 interface Props {}
 
@@ -31,20 +32,9 @@ const Experience = (props: Props) => {
 	// });
 
 	createEffect(() => {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) setIsOpen(true);
-				});
-			},
-			{ threshold: 0.2 }
-		);
-
-		observer.observe(sectionElementRef);
-
-		onCleanup(() => {
-			observer.disconnect();
-		});
+		elementObserver(sectionElementRef, (entry, observer) => {
+			if (entry.isIntersecting) setIsOpen(true)
+		})
 	});
 
 	return (

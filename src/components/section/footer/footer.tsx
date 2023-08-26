@@ -4,6 +4,7 @@ import { footerSocialMediaLink } from "../../../../content/link-content";
 import NavigationList from "../../navigation/navigation-list/navigation-list";
 import "./footer.scss";
 import FooterSocialMediaNavigationList from "./footer-social-media-navigation-list";
+import {elementObserver} from "../../../../hook";
 
 type Props = {};
 type RefType =
@@ -39,26 +40,15 @@ const Footer: Component<Props> = (props: Props) => {
 	let subSectionElementRef: RefType;
 
 	createEffect(() => {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						setIsOpen(true);
-						animateSection(subSectionElementRef, isOpen());
-					} else {
-						setIsOpen(false);
-						animateSection(subSectionElementRef, isOpen());
-					}
-				});
-			},
-			{ threshold: 0.2 }
-		);
-
-		observer.observe(sectionElementRef);
-
-		onCleanup(() => {
-			observer.disconnect();
-		});
+		elementObserver(sectionElementRef, (entry, observer) => {
+			if (entry.isIntersecting) {
+				setIsOpen(true);
+				animateSection(subSectionElementRef, isOpen());
+			} else {
+				setIsOpen(false);
+				animateSection(subSectionElementRef, isOpen());
+			}
+		})
 	});
 
 	return (
